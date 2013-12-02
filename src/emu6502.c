@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "emu6502.h"
 
 void * emu6502_new() {

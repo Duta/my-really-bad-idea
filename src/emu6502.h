@@ -24,7 +24,7 @@ typedef struct {
   bool (*over)(void *self);   /* Overflow Flag */
   bool (*neg)(void *self);    /* Negative Flag */
   /* Destructor */
-  void (*emu6502_destroy)(void *self);
+  void (*destroy)(void *self);
 } emu6502;
 
 void * emu6502_new();

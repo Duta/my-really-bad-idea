@@ -3,104 +3,72 @@
 
 void * emu6502_new() {
   emu6502 *emu = malloc(sizeof(emu6502));
-
   emu->ram = calloc(0x10000, sizeof(uint8_t));
-
-  emu->destroy = emu6502_destroy;
-
-  emu->carry  = emu6502_carry;
-  emu->zero   = emu6502_zero;
-  emu->intdis = emu6502_intdis;
-  emu->decmod = emu6502_decmod;
-  emu->brk    = emu6502_brk;
-  emu->over   = emu6502_over;
-  emu->neg    = emu6502_neg;
-
-  emu->getbyte      = emu6502_getbyte;
-  emu->getword      = emu6502_getword;
-  emu->immbyte      = emu6502_immbyte;
-  emu->zeropgaddr   = emu6502_zeropgaddr;
-  emu->zeropgxaddr  = emu6502_zeropgxaddr;
-  emu->zeropgyaddr  = emu6502_zeropgyaddr;
-  emu->indxaddr     = emu6502_indxaddr;
-
   return emu;
 } 
 
-void emu6502_destroy(void *self) {
-  emu6502 *emu = self;
+void emu6502_destroy(emu6502 *emu) {
   if(emu) {
+    if(emu->ram) {
+      free(emu->ram);
+    } 
     free(emu);
   }
 }
 
-bool emu6502_carry(void *self) {
-  emu6502 *emu = self;
+bool emu6502_carry(emu6502 *emu) {
   return emu->psw & (1 << 0) ? 1 : 0;
 }
 
-bool emu6502_zero(void *self) {
-  emu6502 *emu = self;
+bool emu6502_zero(emu6502 *emu) {
   return emu->psw & (1 << 1) ? 1 : 0;
 }
 
-bool emu6502_intdis(void *self) {
-  emu6502 *emu = self;
+bool emu6502_intdis(emu6502 *emu) {
   return emu->psw & (1 << 2) ? 1 : 0;
 } 
 
-bool emu6502_decmod(void *self) {
-  emu6502 *emu = self;
+bool emu6502_decmod(emu6502 *emu) {
   return emu->psw & (1 << 3) ? 1 : 0;
 } 
 
-bool emu6502_brk(void *self) {
-  emu6502 *emu = self;
+bool emu6502_brk(emu6502 *emu) {
   return emu->psw & (1 << 4) ? 1 : 0;
 } 
 
-bool emu6502_over(void *self) {
-  emu6502 *emu = self;
+bool emu6502_over(emu6502 *emu) {
   return emu->psw & (1 << 6) ? 1 : 0;
 } 
 
-bool emu6502_neg(void *self) {
-  emu6502 *emu = self;
+bool emu6502_neg(emu6502 *emu) {
   return emu->psw & (1 << 7) ? 1 : 0;
 } 
 
-uint8_t emu6502_getbyte(void *self, uint16_t addr) {
-  emu6502 *emu = self;
+uint8_t emu6502_getbyte(emu6502 *emu, uint16_t addr) {
   return emu->ram[addr];
 }
 
-uint16_t emu6502_getword(void *self, uint16_t addr) {
-  emu6502 *emu = self;
+uint16_t emu6502_getword(emu6502 *emu, uint16_t addr) {
   return emu->ram[addr] + (emu->ram[addr+1] << 8);
 }
 
-uint8_t emu6502_immbyte(void *self) {
-  emu6502 *emu = self;
+uint8_t emu6502_immbyte(emu6502 *emu) {
   return emu->ram[emu->pc];
 }
 
-uint8_t emu6502_zeropgaddr(void *self) {
-  emu6502 *emu = self;
+uint8_t emu6502_zeropgaddr(emu6502 *emu) {
   return emu->ram[emu->pc];
 }
 
-uint8_t emu6502_zeropgxaddr(void *self) {
-  emu6502 *emu = self;
+uint8_t emu6502_zeropgxaddr(emu6502 *emu) {
   return emu->x + emu->ram[emu->pc];
 }
 
-uint8_t emu6502_zeropgyaddr(void *self) {
-  emu6502 *emu = self;
+uint8_t emu6502_zeropgyaddr(emu6502 *emu) {
   return emu->y + emu->ram[emu->pc];
 }
 
-uint16_t emu6502_indxaddr(void *self) {
-  emu6502 *emu = self;
-  return emu->getword(emu, emu->x + emu->ram[emu->pc]);
+uint16_t emu6502_indxaddr(emu6502 *emu) {
+  return emu6502_getword(emu, emu->x + emu->ram[emu->pc]);
 }
 

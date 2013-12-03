@@ -4,6 +4,14 @@
 void * emu6502_new() {
   emu6502 *emu = malloc(sizeof(emu6502));
   emu->ram = calloc(0x10000, sizeof(uint8_t));
+  emu->pc = 0;
+  emu->x = 0;
+  emu->y = 0;
+  emu->acc = 0;
+  emu->psw = 0;
+  emu->sp = 0;
+  emu->cycs = 0;
+  emu->excycs = 0;
   return emu;
 } 
 
@@ -70,5 +78,34 @@ uint8_t emu6502_zeropgyaddr(emu6502 *emu) {
 
 uint16_t emu6502_indxaddr(emu6502 *emu) {
   return emu6502_getword(emu, emu->x + emu->ram[emu->pc]);
+}
+
+uint16_t emu6502_indyaddr(emu6502 *emu) {
+  uint16_t a = emu6502_getword(emu, emu->ram[emu->pc]);
+  uint16_t b = (a + emu->y);
+  if((a & 0xFF00) != (b & 0xFF00)) {
+    emu->excycs++;
+  }
+  return b;
+} 
+
+uint16_t emu6502_absaddr(emu6502 *emu) {
+  return emu6502_getword(emu, emu->pc);
+}
+uint16_t emu6502_absxaddr(emu6502 *emu) {
+  uint16_t a = emu6502_getword(emu, emu->pc);
+  uint16_t b = (a + emu->x);
+  if((a & 0xFF00) != (b & 0xFF00)) {
+    emu->excycs++;
+  }
+  return b;
+}
+uint16_t emu6502_absyaddr(emu6502 *emu) {
+  uint16_t a = emu6502_getword(emu, emu->pc);
+  uint16_t b = (a + emu->x);
+  if((a & 0xFF00) != (b & 0xFF00)) {
+    emu->excycs++;
+  }
+  return b;
 }
 

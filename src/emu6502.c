@@ -67,7 +67,7 @@ void emu6502_emu(emu6502 *emu) {
 
 void emu6502_exeins(emu6502 *emu) {
   uint8_t ins = emu->ram[emu->pc++];
-  /* TODO */
+  inslookup[ins]();
 }
 
 bool emu6502_carry(emu6502 *emu) {
@@ -186,6 +186,7 @@ uint16_t emu6502_popword(emu6502 *emu) {
 
 /* Comments for opXX functions is from: */
 /* www.atarimax.com/jindroush.atari.org/aopc.html */
+/* Done up to and including STA instructions */
 
 /* Syntax: BRK */
 /* Mode: Implied */
@@ -195,10 +196,10 @@ void op00(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ORA ($44,X) */
+/* Mode: Indirect,X */
+/* Bytes: 2 */
+/* Time: 6 */
 void op01(emu6502 *emu) {
 
 }
@@ -227,10 +228,10 @@ void op04(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ORA $44 */
+/* Mode: Zero Page */
+/* Bytes: 2 */
+/* Time: 2 */
 void op05(emu6502 *emu) {
 
 }
@@ -259,10 +260,10 @@ void op08(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ORA #$44 */
+/* Mode: Immediate */
+/* Bytes: 2 */
+/* Time: 2 */
 void op09(emu6502 *emu) {
 
 }
@@ -291,10 +292,10 @@ void op0C(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ORA $4400 */
+/* Mode: Absolute */
+/* Bytes: 3 */
+/* Time: 4 */
 void op0D(emu6502 *emu) {
 
 }
@@ -323,10 +324,10 @@ void op10(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ORA ($44),Y */
+/* Mode: Indirect,Y */
+/* Bytes: 2 */
+/* Time: 5 (+1 if page boundary crossed) */
 void op11(emu6502 *emu) {
 
 }
@@ -355,10 +356,10 @@ void op14(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ORA $44,X */
+/* Mode: Zero Page,X */
+/* Bytes: 2 */
+/* Time: 3 */
 void op15(emu6502 *emu) {
 
 }
@@ -379,18 +380,18 @@ void op17(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: CLC */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void op18(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ORA $4400,Y */
+/* Mode: Absolute,Y */
+/* Bytes: 3 */
+/* Time: 4 (+1 if page boundary crossed) */
 void op19(emu6502 *emu) {
 
 }
@@ -419,10 +420,10 @@ void op1C(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ORA $4400,X */
+/* Mode: Absolute,X */
+/* Bytes: 3 */
+/* Time: 4 (+1 if page boundary crossed) */
 void op1D(emu6502 *emu) {
 
 }
@@ -443,10 +444,10 @@ void op1F(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: JSR $5597 */
+/* Mode: Absolute */
+/* Bytes: 3 */
+/* Time: 6 */
 void op20(emu6502 *emu) {
 
 }
@@ -491,10 +492,10 @@ void op25(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ROL $44 */
+/* Mode: Zero Page */
+/* Bytes: 2 */
+/* Time: 5 */
 void op26(emu6502 *emu) {
 
 }
@@ -523,10 +524,10 @@ void op29(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ROL A */
+/* Mode: Accumulator */
+/* Bytes: 1 */
+/* Time: 2 */
 void op2A(emu6502 *emu) {
 
 }
@@ -555,10 +556,10 @@ void op2D(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ROL $4400 */
+/* Mode: Absolute */
+/* Bytes: 3 */
+/* Time: 6 */
 void op2E(emu6502 *emu) {
 
 }
@@ -619,10 +620,10 @@ void op35(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ROL $44,X */
+/* Mode: Zero Page,X */
+/* Bytes: 2 */
+/* Time: 6 */
 void op36(emu6502 *emu) {
 
 }
@@ -635,10 +636,10 @@ void op37(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: SEC */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void op38(emu6502 *emu) {
 
 }
@@ -683,10 +684,10 @@ void op3D(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ROL $4400,X */
+/* Mode: Absolute,X */
+/* Bytes: 3 */
+/* Time: 7 */
 void op3E(emu6502 *emu) {
 
 }
@@ -699,18 +700,18 @@ void op3F(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: RTI */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 6 */
 void op40(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: EOR ($44,X) */
+/* Mode: Indirect,X */
+/* Bytes: 2 */
+/* Time: 6 */
 void op41(emu6502 *emu) {
 
 }
@@ -739,18 +740,18 @@ void op44(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: EOR $44 */
+/* Mode: Zero Page */
+/* Bytes: 2 */
+/* Time: 3 */
 void op45(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LSR $44 */
+/* Mode: Zero Page */
+/* Bytes: 2 */
+/* Time: 5 */
 void op46(emu6502 *emu) {
 
 }
@@ -771,18 +772,18 @@ void op48(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: EOR #$44 */
+/* Mode: Immediate */
+/* Bytes: 2 */
+/* Time: 2 */
 void op49(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LSR A */
+/* Mode: Accumulator */
+/* Bytes: 1 */
+/* Time: 2 */
 void op4A(emu6502 *emu) {
 
 }
@@ -795,26 +796,26 @@ void op4B(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: JMP $5597 */
+/* Mode: Absolute */
+/* Bytes: 3 */
+/* Time: 3 */
 void op4C(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: EOR $4400 */
+/* Mode: Absolute */
+/* Bytes: 3 */
+/* Time: 4 */
 void op4D(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LSR $4400 */
+/* Mode: Absolute */
+/* Bytes: 3 */
+/* Time: 6 */
 void op4E(emu6502 *emu) {
 
 }
@@ -835,10 +836,10 @@ void op50(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: EOR ($44),Y */
+/* Mode: Indirect,Y */
+/* Bytes: 2 */
+/* Time: 5 (+1 if page boundary crossed) */
 void op51(emu6502 *emu) {
 
 }
@@ -867,18 +868,18 @@ void op54(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: EOR $44,X */
+/* Mode: Zero Page,X */
+/* Bytes: 2 */
+/* Time: 4 */
 void op55(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LSR $44,X */
+/* Mode: Zero Page,X */
+/* Bytes: 2 */
+/* Time: 6 */
 void op56(emu6502 *emu) {
 
 }
@@ -891,18 +892,18 @@ void op57(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: CLI */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void op58(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: EOR $4400,Y */
+/* Mode: Absolute,Y */
+/* Bytes: 3 */
+/* Time: 4 (+1 if page boundary crossed) */
 void op59(emu6502 *emu) {
 
 }
@@ -931,18 +932,18 @@ void op5C(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: EOR $4400,X */
+/* Mode: Absolute,X */
+/* Bytes: 3 */
+/* Time: 4 (+1 if page boundary crossed) */
 void op5D(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LSR $4400,X */
+/* Mode: Absolute,X */
+/* Bytes: 3 */
+/* Time: 7 */
 void op5E(emu6502 *emu) {
 
 }
@@ -955,10 +956,10 @@ void op5F(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: RTS */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 6 */
 void op60(emu6502 *emu) {
 
 }
@@ -1003,10 +1004,10 @@ void op65(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ROR $44 */
+/* Mode: Zero Page */
+/* Bytes: 2 */
+/* Time: 5 */
 void op66(emu6502 *emu) {
 
 }
@@ -1035,10 +1036,10 @@ void op69(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ROR A */
+/* Mode: Accumulator */
+/* Bytes: 1 */
+/* Time: 2 */
 void op6A(emu6502 *emu) {
 
 }
@@ -1051,10 +1052,10 @@ void op6B(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: JMP ($5597) */
+/* Mode: Indirect */
+/* Bytes: 3 */
+/* Time: 5 */
 void op6C(emu6502 *emu) {
 
 }
@@ -1067,10 +1068,10 @@ void op6D(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ROR $4400 */
+/* Mode: Absolute */
+/* Bytes: 3 */
+/* Time: 6 */
 void op6E(emu6502 *emu) {
 
 }
@@ -1131,10 +1132,10 @@ void op75(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ROR $44,X */
+/* Mode: Zero Page,X */
+/* Bytes: 2 */
+/* Time: 6 */
 void op76(emu6502 *emu) {
 
 }
@@ -1147,10 +1148,10 @@ void op77(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: SEI */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void op78(emu6502 *emu) {
 
 }
@@ -1195,10 +1196,10 @@ void op7D(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: ROR $4400,X */
+/* Mode: Absolute,X */
+/* Bytes: 3 */
+/* Time: 7 */
 void op7E(emu6502 *emu) {
 
 }
@@ -1219,10 +1220,10 @@ void op80(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: STA ($44,X) */
+/* Mode: Indirect,X */
+/* Bytes: 2 */
+/* Time: 6 */
 void op81(emu6502 *emu) {
 
 }
@@ -1251,10 +1252,10 @@ void op84(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: STA $44 */
+/* Mode: Zero Page */
+/* Bytes: 2 */
+/* Time: 3 */
 void op85(emu6502 *emu) {
 
 }
@@ -1275,10 +1276,10 @@ void op87(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: DEY */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void op88(emu6502 *emu) {
 
 }
@@ -1291,10 +1292,10 @@ void op89(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: TXA */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void op8A(emu6502 *emu) {
 
 }
@@ -1315,10 +1316,10 @@ void op8C(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: STA $4400 */
+/* Mode: Absolute */
+/* Bytes: 3 */
+/* Time: 4 */
 void op8D(emu6502 *emu) {
 
 }
@@ -1347,10 +1348,10 @@ void op90(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: STA ($44),Y */
+/* Mode: Indirect,Y */
+/* Bytes: 2 */
+/* Time: 6 */
 void op91(emu6502 *emu) {
 
 }
@@ -1379,10 +1380,10 @@ void op94(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: STA $44,X */
+/* Mode: Zero Page,X */
+/* Bytes: 2 */
+/* Time: 4 */
 void op95(emu6502 *emu) {
 
 }
@@ -1403,18 +1404,18 @@ void op97(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: TYA */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void op98(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: STA $4400,Y */
+/* Mode: Absolute,Y */
+/* Bytes: 3 */
+/* Time: 5 */
 void op99(emu6502 *emu) {
 
 }
@@ -1443,10 +1444,10 @@ void op9C(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: STA $4400,X */
+/* Mode: Absolute,X */
+/* Bytes: 3 */
+/* Time: 5 */
 void op9D(emu6502 *emu) {
 
 }
@@ -1467,26 +1468,26 @@ void op9F(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDY #$44 */
+/* Mode: Immediate */
+/* Bytes: 2 */
+/* Time: 2 */
 void opA0(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDA ($44,X) */
+/* Mode: Indirect,X */
+/* Bytes: 2 */
+/* Time: 6 */
 void opA1(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDX #$44 */
+/* Mode: Immediate */
+/* Bytes: 2 */
+/* Time: 2 */
 void opA2(emu6502 *emu) {
 
 }
@@ -1499,26 +1500,26 @@ void opA3(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDY $44 */
+/* Mode: Zero Page */
+/* Bytes: 2 */
+/* Time: 3 */
 void opA4(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDA $44 */
+/* Mode: Zero Page */
+/* Bytes: 2 */
+/* Time: 3 */
 void opA5(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDX $44 */
+/* Mode: Zero Page */
+/* Bytes: 2 */
+/* Time: 3 */
 void opA6(emu6502 *emu) {
 
 }
@@ -1531,26 +1532,26 @@ void opA7(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: TAY */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void opA8(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDA #$44 */
+/* Mode: Immediate */
+/* Bytes: 2 */
+/* Time: 2 */
 void opA9(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: TAX */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void opAA(emu6502 *emu) {
 
 }
@@ -1563,26 +1564,26 @@ void opAB(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDY $4400 */
+/* Mode: Absolute */
+/* Bytes: 3 */
+/* Time: 4 */
 void opAC(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDA $4400 */
+/* Mode: Absolute */
+/* Bytes: 3 */
+/* Time: 4 */
 void opAD(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDX $4400 */
+/* Mode: Absolute */
+/* Bytes: 3 */
+/* Time: 4 */
 void opAE(emu6502 *emu) {
 
 }
@@ -1603,10 +1604,10 @@ void opB0(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDA ($44),Y */
+/* Mode: Indirect,Y */
+/* Bytes: 2 */
+/* Time: 5 (+1 if page boundary crossed) */
 void opB1(emu6502 *emu) {
 
 }
@@ -1627,26 +1628,26 @@ void opB3(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDY $44,X */
+/* Mode: Zero Page,X */
+/* Bytes: 2 */
+/* Time: 4 */
 void opB4(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDA $44,X */
+/* Mode: Zero Page,X */
+/* Bytes: 2 */
+/* Time: 4 */
 void opB5(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDX $44,Y */
+/* Mode: Zero Page,Y */
+/* Bytes: 2 */
+/* Time: 4 */
 void opB6(emu6502 *emu) {
 
 }
@@ -1659,18 +1660,18 @@ void opB7(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: CLV */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void opB8(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDA $4400,Y */
+/* Mode: Absolute,Y */
+/* Bytes: 3 */
+/* Time: 4 (+1 if page boundary crossed) */
 void opB9(emu6502 *emu) {
 
 }
@@ -1691,26 +1692,26 @@ void opBB(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDY $4400,X */
+/* Mode: Absolute,X */
+/* Bytes: 3 */
+/* Time: 4 (+1 if page boundary crossed) */
 void opBC(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDA $4400,X */
+/* Mode: Absolute,X */
+/* Bytes: 3 */
+/* Time: 4 (+1 if page boundary crossed) */
 void opBD(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: LDX $4400,Y */
+/* Mode: Absolute,Y */
+/* Bytes: 3 */
+/* Time: 4 (+1 if page boundary crossed) */
 void opBE(emu6502 *emu) {
 
 }
@@ -1787,10 +1788,10 @@ void opC7(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: INY */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void opC8(emu6502 *emu) {
 
 }
@@ -1803,10 +1804,10 @@ void opC9(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: DEX */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void opCA(emu6502 *emu) {
 
 }
@@ -1915,10 +1916,10 @@ void opD7(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: CLD */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void opD8(emu6502 *emu) {
 
 }
@@ -1987,10 +1988,10 @@ void opE0(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: SBC ($44,X) */
+/* Mode: Indirect,X */
+/* Bytes: 2 */
+/* Time: 6 */
 void opE1(emu6502 *emu) {
 
 }
@@ -2019,18 +2020,18 @@ void opE4(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: SBC $44 */
+/* Mode: Zero Page */
+/* Bytes: 2 */
+/* Time: 3 */
 void opE5(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: INC $44 */
+/* Mode: Zero Page */
+/* Bytes: 2 */
+/* Time: 5 */
 void opE6(emu6502 *emu) {
 
 }
@@ -2043,26 +2044,26 @@ void opE7(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: INX */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void opE8(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: SBC #$44 */
+/* Mode: Immediate */
+/* Bytes: 2 */
+/* Time: 2 */
 void opE9(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: NOP */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void opEA(emu6502 *emu) {
 
 }
@@ -2083,18 +2084,18 @@ void opEC(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: SBC $4400 */
+/* Mode: Absolute */
+/* Bytes: 3 */
+/* Time: 4 */
 void opED(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: INC $4400 */
+/* Mode: Absolute */
+/* Bytes: 3 */
+/* Time: 6 */
 void opEE(emu6502 *emu) {
 
 }
@@ -2115,10 +2116,10 @@ void opF0(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: SBC ($44),Y */
+/* Mode: Indirect,Y */
+/* Bytes: 2 */
+/* Time: 5 (+1 if page boundary crossed) */
 void opF1(emu6502 *emu) {
 
 }
@@ -2147,18 +2148,18 @@ void opF4(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: SBC $44,X */
+/* Mode: Zero Page,X */
+/* Bytes: 2 */
+/* Time: 4 */
 void opF5(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: INC $44,X */
+/* Mode: Zero Page,X */
+/* Bytes: 2 */
+/* Time: 6 */
 void opF6(emu6502 *emu) {
 
 }
@@ -2171,18 +2172,18 @@ void opF7(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: SED */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void opF8(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: SBC $4400,Y */
+/* Mode: Absolute,Y */
+/* Bytes: 3 */
+/* Time: 4 (+1 if page boundary crossed) */
 void opF9(emu6502 *emu) {
 
 }
@@ -2211,18 +2212,18 @@ void opFC(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: SBC $4400,X */
+/* Mode: Absolute,X */
+/* Bytes: 3 */
+/* Time: 4 (+1 if page boundary crossed) */
 void opFD(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: INC $4400,X */
+/* Mode: Absolute,X */
+/* Bytes: 3 */
+/* Time: 7 */
 void opFE(emu6502 *emu) {
 
 }
@@ -2234,4 +2235,3 @@ void opFE(emu6502 *emu) {
 void opFF(emu6502 *emu) {
 
 }
-

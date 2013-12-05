@@ -1,10 +1,9 @@
 #include <stdlib.h>
 #include "emu6502.h"
 
-static void op00(emu6502 *emu); static void op01(emu6502 *emu);
-static void op02(emu6502 *emu); static void op03(emu6502 *emu);
-static void op04(emu6502 *emu); static void op05(emu6502 *emu);
-static void op06(emu6502 *emu); static void op07(emu6502 *emu);
+/* Forward Declaration macro */
+#define FD(x) static void op##x(emu6502 *emu)
+FD(00); FD(01); FD(02); FD(03); FD(04); FD(05); FD(06); FD(07);
 static void op08(emu6502 *emu); static void op09(emu6502 *emu);
 static void op0A(emu6502 *emu); static void op0B(emu6502 *emu);
 static void op0C(emu6502 *emu); static void op0D(emu6502 *emu);
@@ -129,7 +128,7 @@ static void opF8(emu6502 *emu); static void opF9(emu6502 *emu);
 static void opFA(emu6502 *emu); static void opFB(emu6502 *emu);
 static void opFC(emu6502 *emu); static void opFD(emu6502 *emu);
 static void opFE(emu6502 *emu); static void opFF(emu6502 *emu);
-
+#undef FD
 
 void (*inslookup[256])(emu6502 *emu) = {
   op00, op01, op02, op03, op04, op05, op06, op07,

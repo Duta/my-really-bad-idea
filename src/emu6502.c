@@ -186,7 +186,6 @@ uint16_t emu6502_popword(emu6502 *emu) {
 
 /* Comments for opXX functions is from: */
 /* www.atarimax.com/jindroush.atari.org/aopc.html */
-/* Done up to and including STA instructions */
 
 /* Syntax: BRK */
 /* Mode: Implied */
@@ -252,10 +251,10 @@ void op07(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: PHP */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 3 */
 void op08(emu6502 *emu) {
 
 }
@@ -508,10 +507,10 @@ void op27(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: PLP */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 4 */
 void op28(emu6502 *emu) {
 
 }
@@ -764,10 +763,10 @@ void op47(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: PHA */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 3 */
 void op48(emu6502 *emu) {
 
 }
@@ -1020,10 +1019,10 @@ void op67(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: PLA */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 4 */
 void op68(emu6502 *emu) {
 
 }
@@ -1244,10 +1243,10 @@ void op83(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: STY $44 */
+/* Mode: Zero Page */
+/* Bytes: 2 */
+/* Time: 3 */
 void op84(emu6502 *emu) {
 
 }
@@ -1260,10 +1259,10 @@ void op85(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: STX $44 */
+/* Mode: Zero Page */
+/* Bytes: 2 */
+/* Time: 3 */
 void op86(emu6502 *emu) {
 
 }
@@ -1308,10 +1307,10 @@ void op8B(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: STY $4400 */
+/* Mode: Absolute */
+/* Bytes: 3 */
+/* Time: 4 */
 void op8C(emu6502 *emu) {
 
 }
@@ -1324,10 +1323,10 @@ void op8D(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: STX $4400 */
+/* Mode: Absolute */
+/* Bytes: 3 */
+/* Time: 4 */
 void op8E(emu6502 *emu) {
 
 }
@@ -1372,10 +1371,10 @@ void op93(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: STY $44,X */
+/* Mode: Zero Page,X */
+/* Bytes: 2 */
+/* Time: 4 */
 void op94(emu6502 *emu) {
 
 }
@@ -1388,10 +1387,10 @@ void op95(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: STX $44,Y */
+/* Mode: Zero Page,Y */
+/* Bytes: 2 */
+/* Time: 4 */
 void op96(emu6502 *emu) {
 
 }
@@ -1420,10 +1419,10 @@ void op99(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: TXS */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void op9A(emu6502 *emu) {
 
 }
@@ -1676,10 +1675,10 @@ void opB9(emu6502 *emu) {
 
 }
 
-/* Syntax: ? */
-/* Mode: ? */
-/* Bytes: ? */
-/* Time: ? */
+/* Syntax: TSX */
+/* Mode: Implied */
+/* Bytes: 1 */
+/* Time: 2 */
 void opBA(emu6502 *emu) {
 
 }

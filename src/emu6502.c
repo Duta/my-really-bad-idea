@@ -1,6 +1,136 @@
 #include <stdlib.h>
 #include "emu6502.h"
 
+static void op00(emu6502 *emu); static void op01(emu6502 *emu);
+static void op02(emu6502 *emu); static void op03(emu6502 *emu);
+static void op04(emu6502 *emu); static void op05(emu6502 *emu);
+static void op06(emu6502 *emu); static void op07(emu6502 *emu);
+static void op08(emu6502 *emu); static void op09(emu6502 *emu);
+static void op0A(emu6502 *emu); static void op0B(emu6502 *emu);
+static void op0C(emu6502 *emu); static void op0D(emu6502 *emu);
+static void op0E(emu6502 *emu); static void op0F(emu6502 *emu);
+static void op10(emu6502 *emu); static void op11(emu6502 *emu);
+static void op12(emu6502 *emu); static void op13(emu6502 *emu);
+static void op14(emu6502 *emu); static void op15(emu6502 *emu);
+static void op16(emu6502 *emu); static void op17(emu6502 *emu);
+static void op18(emu6502 *emu); static void op19(emu6502 *emu);
+static void op1A(emu6502 *emu); static void op1B(emu6502 *emu);
+static void op1C(emu6502 *emu); static void op1D(emu6502 *emu);
+static void op1E(emu6502 *emu); static void op1F(emu6502 *emu);
+static void op20(emu6502 *emu); static void op21(emu6502 *emu);
+static void op22(emu6502 *emu); static void op23(emu6502 *emu);
+static void op24(emu6502 *emu); static void op25(emu6502 *emu);
+static void op26(emu6502 *emu); static void op27(emu6502 *emu);
+static void op28(emu6502 *emu); static void op29(emu6502 *emu);
+static void op2A(emu6502 *emu); static void op2B(emu6502 *emu);
+static void op2C(emu6502 *emu); static void op2D(emu6502 *emu);
+static void op2E(emu6502 *emu); static void op2F(emu6502 *emu);
+static void op30(emu6502 *emu); static void op31(emu6502 *emu);
+static void op32(emu6502 *emu); static void op33(emu6502 *emu);
+static void op34(emu6502 *emu); static void op35(emu6502 *emu);
+static void op36(emu6502 *emu); static void op37(emu6502 *emu);
+static void op38(emu6502 *emu); static void op39(emu6502 *emu);
+static void op3A(emu6502 *emu); static void op3B(emu6502 *emu);
+static void op3C(emu6502 *emu); static void op3D(emu6502 *emu);
+static void op3E(emu6502 *emu); static void op3F(emu6502 *emu);
+static void op40(emu6502 *emu); static void op41(emu6502 *emu);
+static void op42(emu6502 *emu); static void op43(emu6502 *emu);
+static void op44(emu6502 *emu); static void op45(emu6502 *emu);
+static void op46(emu6502 *emu); static void op47(emu6502 *emu);
+static void op48(emu6502 *emu); static void op49(emu6502 *emu);
+static void op4A(emu6502 *emu); static void op4B(emu6502 *emu);
+static void op4C(emu6502 *emu); static void op4D(emu6502 *emu);
+static void op4E(emu6502 *emu); static void op4F(emu6502 *emu);
+static void op50(emu6502 *emu); static void op51(emu6502 *emu);
+static void op52(emu6502 *emu); static void op53(emu6502 *emu);
+static void op54(emu6502 *emu); static void op55(emu6502 *emu);
+static void op56(emu6502 *emu); static void op57(emu6502 *emu);
+static void op58(emu6502 *emu); static void op59(emu6502 *emu);
+static void op5A(emu6502 *emu); static void op5B(emu6502 *emu);
+static void op5C(emu6502 *emu); static void op5D(emu6502 *emu);
+static void op5E(emu6502 *emu); static void op5F(emu6502 *emu);
+static void op60(emu6502 *emu); static void op61(emu6502 *emu);
+static void op62(emu6502 *emu); static void op63(emu6502 *emu);
+static void op64(emu6502 *emu); static void op65(emu6502 *emu);
+static void op66(emu6502 *emu); static void op67(emu6502 *emu);
+static void op68(emu6502 *emu); static void op69(emu6502 *emu);
+static void op6A(emu6502 *emu); static void op6B(emu6502 *emu);
+static void op6C(emu6502 *emu); static void op6D(emu6502 *emu);
+static void op6E(emu6502 *emu); static void op6F(emu6502 *emu);
+static void op70(emu6502 *emu); static void op71(emu6502 *emu);
+static void op72(emu6502 *emu); static void op73(emu6502 *emu);
+static void op74(emu6502 *emu); static void op75(emu6502 *emu);
+static void op76(emu6502 *emu); static void op77(emu6502 *emu);
+static void op78(emu6502 *emu); static void op79(emu6502 *emu);
+static void op7A(emu6502 *emu); static void op7B(emu6502 *emu);
+static void op7C(emu6502 *emu); static void op7D(emu6502 *emu);
+static void op7E(emu6502 *emu); static void op7F(emu6502 *emu);
+static void op80(emu6502 *emu); static void op81(emu6502 *emu);
+static void op82(emu6502 *emu); static void op83(emu6502 *emu);
+static void op84(emu6502 *emu); static void op85(emu6502 *emu);
+static void op86(emu6502 *emu); static void op87(emu6502 *emu);
+static void op88(emu6502 *emu); static void op89(emu6502 *emu);
+static void op8A(emu6502 *emu); static void op8B(emu6502 *emu);
+static void op8C(emu6502 *emu); static void op8D(emu6502 *emu);
+static void op8E(emu6502 *emu); static void op8F(emu6502 *emu);
+static void op90(emu6502 *emu); static void op91(emu6502 *emu);
+static void op92(emu6502 *emu); static void op93(emu6502 *emu);
+static void op94(emu6502 *emu); static void op95(emu6502 *emu);
+static void op96(emu6502 *emu); static void op97(emu6502 *emu);
+static void op98(emu6502 *emu); static void op99(emu6502 *emu);
+static void op9A(emu6502 *emu); static void op9B(emu6502 *emu);
+static void op9C(emu6502 *emu); static void op9D(emu6502 *emu);
+static void op9E(emu6502 *emu); static void op9F(emu6502 *emu);
+static void opA0(emu6502 *emu); static void opA1(emu6502 *emu);
+static void opA2(emu6502 *emu); static void opA3(emu6502 *emu);
+static void opA4(emu6502 *emu); static void opA5(emu6502 *emu);
+static void opA6(emu6502 *emu); static void opA7(emu6502 *emu);
+static void opA8(emu6502 *emu); static void opA9(emu6502 *emu);
+static void opAA(emu6502 *emu); static void opAB(emu6502 *emu);
+static void opAC(emu6502 *emu); static void opAD(emu6502 *emu);
+static void opAE(emu6502 *emu); static void opAF(emu6502 *emu);
+static void opB0(emu6502 *emu); static void opB1(emu6502 *emu);
+static void opB2(emu6502 *emu); static void opB3(emu6502 *emu);
+static void opB4(emu6502 *emu); static void opB5(emu6502 *emu);
+static void opB6(emu6502 *emu); static void opB7(emu6502 *emu);
+static void opB8(emu6502 *emu); static void opB9(emu6502 *emu);
+static void opBA(emu6502 *emu); static void opBB(emu6502 *emu);
+static void opBC(emu6502 *emu); static void opBD(emu6502 *emu);
+static void opBE(emu6502 *emu); static void opBF(emu6502 *emu);
+static void opC0(emu6502 *emu); static void opC1(emu6502 *emu);
+static void opC2(emu6502 *emu); static void opC3(emu6502 *emu);
+static void opC4(emu6502 *emu); static void opC5(emu6502 *emu);
+static void opC6(emu6502 *emu); static void opC7(emu6502 *emu);
+static void opC8(emu6502 *emu); static void opC9(emu6502 *emu);
+static void opCA(emu6502 *emu); static void opCB(emu6502 *emu);
+static void opCC(emu6502 *emu); static void opCD(emu6502 *emu);
+static void opCE(emu6502 *emu); static void opCF(emu6502 *emu);
+static void opD0(emu6502 *emu); static void opD1(emu6502 *emu);
+static void opD2(emu6502 *emu); static void opD3(emu6502 *emu);
+static void opD4(emu6502 *emu); static void opD5(emu6502 *emu);
+static void opD6(emu6502 *emu); static void opD7(emu6502 *emu);
+static void opD8(emu6502 *emu); static void opD9(emu6502 *emu);
+static void opDA(emu6502 *emu); static void opDB(emu6502 *emu);
+static void opDC(emu6502 *emu); static void opDD(emu6502 *emu);
+static void opDE(emu6502 *emu); static void opDF(emu6502 *emu);
+static void opE0(emu6502 *emu); static void opE1(emu6502 *emu);
+static void opE2(emu6502 *emu); static void opE3(emu6502 *emu);
+static void opE4(emu6502 *emu); static void opE5(emu6502 *emu);
+static void opE6(emu6502 *emu); static void opE7(emu6502 *emu);
+static void opE8(emu6502 *emu); static void opE9(emu6502 *emu);
+static void opEA(emu6502 *emu); static void opEB(emu6502 *emu);
+static void opEC(emu6502 *emu); static void opED(emu6502 *emu);
+static void opEE(emu6502 *emu); static void opEF(emu6502 *emu);
+static void opF0(emu6502 *emu); static void opF1(emu6502 *emu);
+static void opF2(emu6502 *emu); static void opF3(emu6502 *emu);
+static void opF4(emu6502 *emu); static void opF5(emu6502 *emu);
+static void opF6(emu6502 *emu); static void opF7(emu6502 *emu);
+static void opF8(emu6502 *emu); static void opF9(emu6502 *emu);
+static void opFA(emu6502 *emu); static void opFB(emu6502 *emu);
+static void opFC(emu6502 *emu); static void opFD(emu6502 *emu);
+static void opFE(emu6502 *emu); static void opFF(emu6502 *emu);
+
+
 void (*inslookup[256])(emu6502 *emu) = {
   op00, op01, op02, op03, op04, op05, op06, op07,
   op08, op09, op0A, op0B, op0C, op0D, op0E, op0F,
@@ -191,7 +321,7 @@ uint16_t emu6502_popword(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 7 */
-void op00(emu6502 *emu) {
+static void op00(emu6502 *emu) {
 
 }
 
@@ -199,7 +329,7 @@ void op00(emu6502 *emu) {
 /* Mode: Indirect,X */
 /* Bytes: 2 */
 /* Time: 6 */
-void op01(emu6502 *emu) {
+static void op01(emu6502 *emu) {
 
 }
 
@@ -207,7 +337,7 @@ void op01(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op02(emu6502 *emu) {
+static void op02(emu6502 *emu) {
 
 }
 
@@ -215,7 +345,7 @@ void op02(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op03(emu6502 *emu) {
+static void op03(emu6502 *emu) {
 
 }
 
@@ -223,7 +353,7 @@ void op03(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op04(emu6502 *emu) {
+static void op04(emu6502 *emu) {
 
 }
 
@@ -231,7 +361,7 @@ void op04(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 2 */
-void op05(emu6502 *emu) {
+static void op05(emu6502 *emu) {
 
 }
 
@@ -239,7 +369,7 @@ void op05(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 5 */
-void op06(emu6502 *emu) {
+static void op06(emu6502 *emu) {
 
 }
 
@@ -247,7 +377,7 @@ void op06(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op07(emu6502 *emu) {
+static void op07(emu6502 *emu) {
 
 }
 
@@ -255,7 +385,7 @@ void op07(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 3 */
-void op08(emu6502 *emu) {
+static void op08(emu6502 *emu) {
 
 }
 
@@ -263,7 +393,7 @@ void op08(emu6502 *emu) {
 /* Mode: Immediate */
 /* Bytes: 2 */
 /* Time: 2 */
-void op09(emu6502 *emu) {
+static void op09(emu6502 *emu) {
 
 }
 
@@ -271,7 +401,7 @@ void op09(emu6502 *emu) {
 /* Mode: Accumulator */
 /* Bytes: 1 */
 /* Time: 2 */
-void op0A(emu6502 *emu) {
+static void op0A(emu6502 *emu) {
 
 }
 
@@ -279,7 +409,7 @@ void op0A(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op0B(emu6502 *emu) {
+static void op0B(emu6502 *emu) {
 
 }
 
@@ -287,7 +417,7 @@ void op0B(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op0C(emu6502 *emu) {
+static void op0C(emu6502 *emu) {
 
 }
 
@@ -295,7 +425,7 @@ void op0C(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 4 */
-void op0D(emu6502 *emu) {
+static void op0D(emu6502 *emu) {
 
 }
 
@@ -303,7 +433,7 @@ void op0D(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 6 */
-void op0E(emu6502 *emu) {
+static void op0E(emu6502 *emu) {
 
 }
 
@@ -311,7 +441,7 @@ void op0E(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op0F(emu6502 *emu) {
+static void op0F(emu6502 *emu) {
 
 }
 
@@ -319,7 +449,7 @@ void op0F(emu6502 *emu) {
 /* Mode: - */
 /* Bytes: 2 */
 /* Time: 2 (+1 if branch taken, +1 if page boundary crossed) */
-void op10(emu6502 *emu) {
+static void op10(emu6502 *emu) {
 
 }
 
@@ -327,7 +457,7 @@ void op10(emu6502 *emu) {
 /* Mode: Indirect,Y */
 /* Bytes: 2 */
 /* Time: 5 (+1 if page boundary crossed) */
-void op11(emu6502 *emu) {
+static void op11(emu6502 *emu) {
 
 }
 
@@ -335,7 +465,7 @@ void op11(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op12(emu6502 *emu) {
+static void op12(emu6502 *emu) {
 
 }
 
@@ -343,7 +473,7 @@ void op12(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op13(emu6502 *emu) {
+static void op13(emu6502 *emu) {
 
 }
 
@@ -351,7 +481,7 @@ void op13(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op14(emu6502 *emu) {
+static void op14(emu6502 *emu) {
 
 }
 
@@ -359,7 +489,7 @@ void op14(emu6502 *emu) {
 /* Mode: Zero Page,X */
 /* Bytes: 2 */
 /* Time: 3 */
-void op15(emu6502 *emu) {
+static void op15(emu6502 *emu) {
 
 }
 
@@ -367,7 +497,7 @@ void op15(emu6502 *emu) {
 /* Mode: Zero Page,X */
 /* Bytes: 2 */
 /* Time: 6 */
-void op16(emu6502 *emu) {
+static void op16(emu6502 *emu) {
 
 }
 
@@ -375,7 +505,7 @@ void op16(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op17(emu6502 *emu) {
+static void op17(emu6502 *emu) {
 
 }
 
@@ -383,7 +513,7 @@ void op17(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void op18(emu6502 *emu) {
+static void op18(emu6502 *emu) {
 
 }
 
@@ -391,7 +521,7 @@ void op18(emu6502 *emu) {
 /* Mode: Absolute,Y */
 /* Bytes: 3 */
 /* Time: 4 (+1 if page boundary crossed) */
-void op19(emu6502 *emu) {
+static void op19(emu6502 *emu) {
 
 }
 
@@ -399,7 +529,7 @@ void op19(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op1A(emu6502 *emu) {
+static void op1A(emu6502 *emu) {
 
 }
 
@@ -407,7 +537,7 @@ void op1A(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op1B(emu6502 *emu) {
+static void op1B(emu6502 *emu) {
 
 }
 
@@ -415,7 +545,7 @@ void op1B(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op1C(emu6502 *emu) {
+static void op1C(emu6502 *emu) {
 
 }
 
@@ -423,7 +553,7 @@ void op1C(emu6502 *emu) {
 /* Mode: Absolute,X */
 /* Bytes: 3 */
 /* Time: 4 (+1 if page boundary crossed) */
-void op1D(emu6502 *emu) {
+static void op1D(emu6502 *emu) {
 
 }
 
@@ -431,7 +561,7 @@ void op1D(emu6502 *emu) {
 /* Mode: Absolute,X */
 /* Bytes: 3 */
 /* Time: 7 */
-void op1E(emu6502 *emu) {
+static void op1E(emu6502 *emu) {
 
 }
 
@@ -439,7 +569,7 @@ void op1E(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op1F(emu6502 *emu) {
+static void op1F(emu6502 *emu) {
 
 }
 
@@ -447,7 +577,7 @@ void op1F(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 6 */
-void op20(emu6502 *emu) {
+static void op20(emu6502 *emu) {
 
 }
 
@@ -455,7 +585,7 @@ void op20(emu6502 *emu) {
 /* Mode: Indirect,X */
 /* Bytes: 2 */
 /* Time: 6 */
-void op21(emu6502 *emu) {
+static void op21(emu6502 *emu) {
 
 }
 
@@ -463,7 +593,7 @@ void op21(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op22(emu6502 *emu) {
+static void op22(emu6502 *emu) {
 
 }
 
@@ -471,7 +601,7 @@ void op22(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op23(emu6502 *emu) {
+static void op23(emu6502 *emu) {
 
 }
 
@@ -479,7 +609,7 @@ void op23(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 3 */
-void op24(emu6502 *emu) {
+static void op24(emu6502 *emu) {
 
 }
 
@@ -487,7 +617,7 @@ void op24(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 2 */
-void op25(emu6502 *emu) {
+static void op25(emu6502 *emu) {
 
 }
 
@@ -495,7 +625,7 @@ void op25(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 5 */
-void op26(emu6502 *emu) {
+static void op26(emu6502 *emu) {
 
 }
 
@@ -503,7 +633,7 @@ void op26(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op27(emu6502 *emu) {
+static void op27(emu6502 *emu) {
 
 }
 
@@ -511,7 +641,7 @@ void op27(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 4 */
-void op28(emu6502 *emu) {
+static void op28(emu6502 *emu) {
 
 }
 
@@ -519,7 +649,7 @@ void op28(emu6502 *emu) {
 /* Mode: Immediate */
 /* Bytes: 2 */
 /* Time: 2 */
-void op29(emu6502 *emu) {
+static void op29(emu6502 *emu) {
 
 }
 
@@ -527,7 +657,7 @@ void op29(emu6502 *emu) {
 /* Mode: Accumulator */
 /* Bytes: 1 */
 /* Time: 2 */
-void op2A(emu6502 *emu) {
+static void op2A(emu6502 *emu) {
 
 }
 
@@ -535,7 +665,7 @@ void op2A(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op2B(emu6502 *emu) {
+static void op2B(emu6502 *emu) {
 
 }
 
@@ -543,7 +673,7 @@ void op2B(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 4 */
-void op2C(emu6502 *emu) {
+static void op2C(emu6502 *emu) {
 
 }
 
@@ -551,7 +681,7 @@ void op2C(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 4 */
-void op2D(emu6502 *emu) {
+static void op2D(emu6502 *emu) {
 
 }
 
@@ -559,7 +689,7 @@ void op2D(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 6 */
-void op2E(emu6502 *emu) {
+static void op2E(emu6502 *emu) {
 
 }
 
@@ -567,7 +697,7 @@ void op2E(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op2F(emu6502 *emu) {
+static void op2F(emu6502 *emu) {
 
 }
 
@@ -575,7 +705,7 @@ void op2F(emu6502 *emu) {
 /* Mode: - */
 /* Bytes: 2 */
 /* Time: 2 (+1 if branch taken, +1 if page boundary crossed) */
-void op30(emu6502 *emu) {
+static void op30(emu6502 *emu) {
 
 }
 
@@ -583,7 +713,7 @@ void op30(emu6502 *emu) {
 /* Mode: Indirect,Y */
 /* Bytes: 2 */
 /* Time: 5 (+1 if page boundary crossed) */
-void op31(emu6502 *emu) {
+static void op31(emu6502 *emu) {
 
 }
 
@@ -591,7 +721,7 @@ void op31(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op32(emu6502 *emu) {
+static void op32(emu6502 *emu) {
 
 }
 
@@ -599,7 +729,7 @@ void op32(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op33(emu6502 *emu) {
+static void op33(emu6502 *emu) {
 
 }
 
@@ -607,7 +737,7 @@ void op33(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op34(emu6502 *emu) {
+static void op34(emu6502 *emu) {
 
 }
 
@@ -615,7 +745,7 @@ void op34(emu6502 *emu) {
 /* Mode: Zero Page,X */
 /* Bytes: 2 */
 /* Time: 3 */
-void op35(emu6502 *emu) {
+static void op35(emu6502 *emu) {
 
 }
 
@@ -623,7 +753,7 @@ void op35(emu6502 *emu) {
 /* Mode: Zero Page,X */
 /* Bytes: 2 */
 /* Time: 6 */
-void op36(emu6502 *emu) {
+static void op36(emu6502 *emu) {
 
 }
 
@@ -631,7 +761,7 @@ void op36(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op37(emu6502 *emu) {
+static void op37(emu6502 *emu) {
 
 }
 
@@ -639,7 +769,7 @@ void op37(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void op38(emu6502 *emu) {
+static void op38(emu6502 *emu) {
 
 }
 
@@ -647,7 +777,7 @@ void op38(emu6502 *emu) {
 /* Mode: Absolute,Y */
 /* Bytes: 3 */
 /* Time: 4 (+1 if page boundary crossed) */
-void op39(emu6502 *emu) {
+static void op39(emu6502 *emu) {
 
 }
 
@@ -655,7 +785,7 @@ void op39(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op3A(emu6502 *emu) {
+static void op3A(emu6502 *emu) {
 
 }
 
@@ -663,7 +793,7 @@ void op3A(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op3B(emu6502 *emu) {
+static void op3B(emu6502 *emu) {
 
 }
 
@@ -671,7 +801,7 @@ void op3B(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op3C(emu6502 *emu) {
+static void op3C(emu6502 *emu) {
 
 }
 
@@ -679,7 +809,7 @@ void op3C(emu6502 *emu) {
 /* Mode: Absolute,X */
 /* Bytes: 3 */
 /* Time: 4 (+1 if page boundary crossed) */
-void op3D(emu6502 *emu) {
+static void op3D(emu6502 *emu) {
 
 }
 
@@ -687,7 +817,7 @@ void op3D(emu6502 *emu) {
 /* Mode: Absolute,X */
 /* Bytes: 3 */
 /* Time: 7 */
-void op3E(emu6502 *emu) {
+static void op3E(emu6502 *emu) {
 
 }
 
@@ -695,7 +825,7 @@ void op3E(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op3F(emu6502 *emu) {
+static void op3F(emu6502 *emu) {
 
 }
 
@@ -703,7 +833,7 @@ void op3F(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 6 */
-void op40(emu6502 *emu) {
+static void op40(emu6502 *emu) {
 
 }
 
@@ -711,7 +841,7 @@ void op40(emu6502 *emu) {
 /* Mode: Indirect,X */
 /* Bytes: 2 */
 /* Time: 6 */
-void op41(emu6502 *emu) {
+static void op41(emu6502 *emu) {
 
 }
 
@@ -719,7 +849,7 @@ void op41(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op42(emu6502 *emu) {
+static void op42(emu6502 *emu) {
 
 }
 
@@ -727,7 +857,7 @@ void op42(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op43(emu6502 *emu) {
+static void op43(emu6502 *emu) {
 
 }
 
@@ -735,7 +865,7 @@ void op43(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op44(emu6502 *emu) {
+static void op44(emu6502 *emu) {
 
 }
 
@@ -743,7 +873,7 @@ void op44(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 3 */
-void op45(emu6502 *emu) {
+static void op45(emu6502 *emu) {
 
 }
 
@@ -751,7 +881,7 @@ void op45(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 5 */
-void op46(emu6502 *emu) {
+static void op46(emu6502 *emu) {
 
 }
 
@@ -759,7 +889,7 @@ void op46(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op47(emu6502 *emu) {
+static void op47(emu6502 *emu) {
 
 }
 
@@ -767,7 +897,7 @@ void op47(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 3 */
-void op48(emu6502 *emu) {
+static void op48(emu6502 *emu) {
 
 }
 
@@ -775,7 +905,7 @@ void op48(emu6502 *emu) {
 /* Mode: Immediate */
 /* Bytes: 2 */
 /* Time: 2 */
-void op49(emu6502 *emu) {
+static void op49(emu6502 *emu) {
 
 }
 
@@ -783,7 +913,7 @@ void op49(emu6502 *emu) {
 /* Mode: Accumulator */
 /* Bytes: 1 */
 /* Time: 2 */
-void op4A(emu6502 *emu) {
+static void op4A(emu6502 *emu) {
 
 }
 
@@ -791,7 +921,7 @@ void op4A(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op4B(emu6502 *emu) {
+static void op4B(emu6502 *emu) {
 
 }
 
@@ -799,7 +929,7 @@ void op4B(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 3 */
-void op4C(emu6502 *emu) {
+static void op4C(emu6502 *emu) {
 
 }
 
@@ -807,7 +937,7 @@ void op4C(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 4 */
-void op4D(emu6502 *emu) {
+static void op4D(emu6502 *emu) {
 
 }
 
@@ -815,7 +945,7 @@ void op4D(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 6 */
-void op4E(emu6502 *emu) {
+static void op4E(emu6502 *emu) {
 
 }
 
@@ -823,7 +953,7 @@ void op4E(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op4F(emu6502 *emu) {
+static void op4F(emu6502 *emu) {
 
 }
 
@@ -831,7 +961,7 @@ void op4F(emu6502 *emu) {
 /* Mode: - */
 /* Bytes: 2 */
 /* Time: 2 (+1 if branch taken, +1 if page boundary crossed) */
-void op50(emu6502 *emu) {
+static void op50(emu6502 *emu) {
 
 }
 
@@ -839,7 +969,7 @@ void op50(emu6502 *emu) {
 /* Mode: Indirect,Y */
 /* Bytes: 2 */
 /* Time: 5 (+1 if page boundary crossed) */
-void op51(emu6502 *emu) {
+static void op51(emu6502 *emu) {
 
 }
 
@@ -847,7 +977,7 @@ void op51(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op52(emu6502 *emu) {
+static void op52(emu6502 *emu) {
 
 }
 
@@ -855,7 +985,7 @@ void op52(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op53(emu6502 *emu) {
+static void op53(emu6502 *emu) {
 
 }
 
@@ -863,7 +993,7 @@ void op53(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op54(emu6502 *emu) {
+static void op54(emu6502 *emu) {
 
 }
 
@@ -871,7 +1001,7 @@ void op54(emu6502 *emu) {
 /* Mode: Zero Page,X */
 /* Bytes: 2 */
 /* Time: 4 */
-void op55(emu6502 *emu) {
+static void op55(emu6502 *emu) {
 
 }
 
@@ -879,7 +1009,7 @@ void op55(emu6502 *emu) {
 /* Mode: Zero Page,X */
 /* Bytes: 2 */
 /* Time: 6 */
-void op56(emu6502 *emu) {
+static void op56(emu6502 *emu) {
 
 }
 
@@ -887,7 +1017,7 @@ void op56(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op57(emu6502 *emu) {
+static void op57(emu6502 *emu) {
 
 }
 
@@ -895,7 +1025,7 @@ void op57(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void op58(emu6502 *emu) {
+static void op58(emu6502 *emu) {
 
 }
 
@@ -903,7 +1033,7 @@ void op58(emu6502 *emu) {
 /* Mode: Absolute,Y */
 /* Bytes: 3 */
 /* Time: 4 (+1 if page boundary crossed) */
-void op59(emu6502 *emu) {
+static void op59(emu6502 *emu) {
 
 }
 
@@ -911,7 +1041,7 @@ void op59(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op5A(emu6502 *emu) {
+static void op5A(emu6502 *emu) {
 
 }
 
@@ -919,7 +1049,7 @@ void op5A(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op5B(emu6502 *emu) {
+static void op5B(emu6502 *emu) {
 
 }
 
@@ -927,7 +1057,7 @@ void op5B(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op5C(emu6502 *emu) {
+static void op5C(emu6502 *emu) {
 
 }
 
@@ -935,7 +1065,7 @@ void op5C(emu6502 *emu) {
 /* Mode: Absolute,X */
 /* Bytes: 3 */
 /* Time: 4 (+1 if page boundary crossed) */
-void op5D(emu6502 *emu) {
+static void op5D(emu6502 *emu) {
 
 }
 
@@ -943,7 +1073,7 @@ void op5D(emu6502 *emu) {
 /* Mode: Absolute,X */
 /* Bytes: 3 */
 /* Time: 7 */
-void op5E(emu6502 *emu) {
+static void op5E(emu6502 *emu) {
 
 }
 
@@ -951,7 +1081,7 @@ void op5E(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op5F(emu6502 *emu) {
+static void op5F(emu6502 *emu) {
 
 }
 
@@ -959,7 +1089,7 @@ void op5F(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 6 */
-void op60(emu6502 *emu) {
+static void op60(emu6502 *emu) {
 
 }
 
@@ -967,7 +1097,7 @@ void op60(emu6502 *emu) {
 /* Mode: Indirect,X */
 /* Bytes: 2 */
 /* Time: 6 */
-void op61(emu6502 *emu) {
+static void op61(emu6502 *emu) {
 
 }
 
@@ -975,7 +1105,7 @@ void op61(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op62(emu6502 *emu) {
+static void op62(emu6502 *emu) {
 
 }
 
@@ -983,7 +1113,7 @@ void op62(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op63(emu6502 *emu) {
+static void op63(emu6502 *emu) {
 
 }
 
@@ -991,7 +1121,7 @@ void op63(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op64(emu6502 *emu) {
+static void op64(emu6502 *emu) {
 
 }
 
@@ -999,7 +1129,7 @@ void op64(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 3 */
-void op65(emu6502 *emu) {
+static void op65(emu6502 *emu) {
 
 }
 
@@ -1007,7 +1137,7 @@ void op65(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 5 */
-void op66(emu6502 *emu) {
+static void op66(emu6502 *emu) {
 
 }
 
@@ -1015,7 +1145,7 @@ void op66(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op67(emu6502 *emu) {
+static void op67(emu6502 *emu) {
 
 }
 
@@ -1023,7 +1153,7 @@ void op67(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 4 */
-void op68(emu6502 *emu) {
+static void op68(emu6502 *emu) {
 
 }
 
@@ -1031,7 +1161,7 @@ void op68(emu6502 *emu) {
 /* Mode: Immediate */
 /* Bytes: 2 */
 /* Time: 2 */
-void op69(emu6502 *emu) {
+static void op69(emu6502 *emu) {
 
 }
 
@@ -1039,7 +1169,7 @@ void op69(emu6502 *emu) {
 /* Mode: Accumulator */
 /* Bytes: 1 */
 /* Time: 2 */
-void op6A(emu6502 *emu) {
+static void op6A(emu6502 *emu) {
 
 }
 
@@ -1047,7 +1177,7 @@ void op6A(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op6B(emu6502 *emu) {
+static void op6B(emu6502 *emu) {
 
 }
 
@@ -1055,7 +1185,7 @@ void op6B(emu6502 *emu) {
 /* Mode: Indirect */
 /* Bytes: 3 */
 /* Time: 5 */
-void op6C(emu6502 *emu) {
+static void op6C(emu6502 *emu) {
 
 }
 
@@ -1063,7 +1193,7 @@ void op6C(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 4 */
-void op6D(emu6502 *emu) {
+static void op6D(emu6502 *emu) {
 
 }
 
@@ -1071,7 +1201,7 @@ void op6D(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 6 */
-void op6E(emu6502 *emu) {
+static void op6E(emu6502 *emu) {
 
 }
 
@@ -1079,7 +1209,7 @@ void op6E(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op6F(emu6502 *emu) {
+static void op6F(emu6502 *emu) {
 
 }
 
@@ -1087,7 +1217,7 @@ void op6F(emu6502 *emu) {
 /* Mode: - */
 /* Bytes: 2 */
 /* Time: 2 (+1 if branch taken, +1 if page boundary crossed) */
-void op70(emu6502 *emu) {
+static void op70(emu6502 *emu) {
 
 }
 
@@ -1095,7 +1225,7 @@ void op70(emu6502 *emu) {
 /* Mode: Indirect,Y */
 /* Bytes: 2 */
 /* Time: 5 (+1 if page boundary crossed) */
-void op71(emu6502 *emu) {
+static void op71(emu6502 *emu) {
 
 }
 
@@ -1103,7 +1233,7 @@ void op71(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op72(emu6502 *emu) {
+static void op72(emu6502 *emu) {
 
 }
 
@@ -1111,7 +1241,7 @@ void op72(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op73(emu6502 *emu) {
+static void op73(emu6502 *emu) {
 
 }
 
@@ -1119,7 +1249,7 @@ void op73(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op74(emu6502 *emu) {
+static void op74(emu6502 *emu) {
 
 }
 
@@ -1127,7 +1257,7 @@ void op74(emu6502 *emu) {
 /* Mode: Zero Page,X */
 /* Bytes: 2 */
 /* Time: 4 */
-void op75(emu6502 *emu) {
+static void op75(emu6502 *emu) {
 
 }
 
@@ -1135,7 +1265,7 @@ void op75(emu6502 *emu) {
 /* Mode: Zero Page,X */
 /* Bytes: 2 */
 /* Time: 6 */
-void op76(emu6502 *emu) {
+static void op76(emu6502 *emu) {
 
 }
 
@@ -1143,7 +1273,7 @@ void op76(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op77(emu6502 *emu) {
+static void op77(emu6502 *emu) {
 
 }
 
@@ -1151,7 +1281,7 @@ void op77(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void op78(emu6502 *emu) {
+static void op78(emu6502 *emu) {
 
 }
 
@@ -1159,7 +1289,7 @@ void op78(emu6502 *emu) {
 /* Mode: Absolute,Y */
 /* Bytes: 3 */
 /* Time: 4 (+1 if page boundary crossed) */
-void op79(emu6502 *emu) {
+static void op79(emu6502 *emu) {
 
 }
 
@@ -1167,7 +1297,7 @@ void op79(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op7A(emu6502 *emu) {
+static void op7A(emu6502 *emu) {
 
 }
 
@@ -1175,7 +1305,7 @@ void op7A(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op7B(emu6502 *emu) {
+static void op7B(emu6502 *emu) {
 
 }
 
@@ -1183,7 +1313,7 @@ void op7B(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op7C(emu6502 *emu) {
+static void op7C(emu6502 *emu) {
 
 }
 
@@ -1191,7 +1321,7 @@ void op7C(emu6502 *emu) {
 /* Mode: Absolute,X */
 /* Bytes: 3 */
 /* Time: 4 (+1 if page boundary crossed) */
-void op7D(emu6502 *emu) {
+static void op7D(emu6502 *emu) {
 
 }
 
@@ -1199,7 +1329,7 @@ void op7D(emu6502 *emu) {
 /* Mode: Absolute,X */
 /* Bytes: 3 */
 /* Time: 7 */
-void op7E(emu6502 *emu) {
+static void op7E(emu6502 *emu) {
 
 }
 
@@ -1207,7 +1337,7 @@ void op7E(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op7F(emu6502 *emu) {
+static void op7F(emu6502 *emu) {
 
 }
 
@@ -1215,7 +1345,7 @@ void op7F(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op80(emu6502 *emu) {
+static void op80(emu6502 *emu) {
 
 }
 
@@ -1223,7 +1353,7 @@ void op80(emu6502 *emu) {
 /* Mode: Indirect,X */
 /* Bytes: 2 */
 /* Time: 6 */
-void op81(emu6502 *emu) {
+static void op81(emu6502 *emu) {
 
 }
 
@@ -1231,7 +1361,7 @@ void op81(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op82(emu6502 *emu) {
+static void op82(emu6502 *emu) {
 
 }
 
@@ -1239,7 +1369,7 @@ void op82(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op83(emu6502 *emu) {
+static void op83(emu6502 *emu) {
 
 }
 
@@ -1247,7 +1377,7 @@ void op83(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 3 */
-void op84(emu6502 *emu) {
+static void op84(emu6502 *emu) {
 
 }
 
@@ -1255,7 +1385,7 @@ void op84(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 3 */
-void op85(emu6502 *emu) {
+static void op85(emu6502 *emu) {
 
 }
 
@@ -1263,7 +1393,7 @@ void op85(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 3 */
-void op86(emu6502 *emu) {
+static void op86(emu6502 *emu) {
 
 }
 
@@ -1271,7 +1401,7 @@ void op86(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op87(emu6502 *emu) {
+static void op87(emu6502 *emu) {
 
 }
 
@@ -1279,7 +1409,7 @@ void op87(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void op88(emu6502 *emu) {
+static void op88(emu6502 *emu) {
 
 }
 
@@ -1287,7 +1417,7 @@ void op88(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op89(emu6502 *emu) {
+static void op89(emu6502 *emu) {
 
 }
 
@@ -1295,7 +1425,7 @@ void op89(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void op8A(emu6502 *emu) {
+static void op8A(emu6502 *emu) {
 
 }
 
@@ -1303,7 +1433,7 @@ void op8A(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op8B(emu6502 *emu) {
+static void op8B(emu6502 *emu) {
 
 }
 
@@ -1311,7 +1441,7 @@ void op8B(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 4 */
-void op8C(emu6502 *emu) {
+static void op8C(emu6502 *emu) {
 
 }
 
@@ -1319,7 +1449,7 @@ void op8C(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 4 */
-void op8D(emu6502 *emu) {
+static void op8D(emu6502 *emu) {
 
 }
 
@@ -1327,7 +1457,7 @@ void op8D(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 4 */
-void op8E(emu6502 *emu) {
+static void op8E(emu6502 *emu) {
 
 }
 
@@ -1335,7 +1465,7 @@ void op8E(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op8F(emu6502 *emu) {
+static void op8F(emu6502 *emu) {
 
 }
 
@@ -1343,7 +1473,7 @@ void op8F(emu6502 *emu) {
 /* Mode: - */
 /* Bytes: 2 */
 /* Time: 2 (+1 if branch taken, +1 if page boundary crossed) */
-void op90(emu6502 *emu) {
+static void op90(emu6502 *emu) {
 
 }
 
@@ -1351,7 +1481,7 @@ void op90(emu6502 *emu) {
 /* Mode: Indirect,Y */
 /* Bytes: 2 */
 /* Time: 6 */
-void op91(emu6502 *emu) {
+static void op91(emu6502 *emu) {
 
 }
 
@@ -1359,7 +1489,7 @@ void op91(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op92(emu6502 *emu) {
+static void op92(emu6502 *emu) {
 
 }
 
@@ -1367,7 +1497,7 @@ void op92(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op93(emu6502 *emu) {
+static void op93(emu6502 *emu) {
 
 }
 
@@ -1375,7 +1505,7 @@ void op93(emu6502 *emu) {
 /* Mode: Zero Page,X */
 /* Bytes: 2 */
 /* Time: 4 */
-void op94(emu6502 *emu) {
+static void op94(emu6502 *emu) {
 
 }
 
@@ -1383,7 +1513,7 @@ void op94(emu6502 *emu) {
 /* Mode: Zero Page,X */
 /* Bytes: 2 */
 /* Time: 4 */
-void op95(emu6502 *emu) {
+static void op95(emu6502 *emu) {
 
 }
 
@@ -1391,7 +1521,7 @@ void op95(emu6502 *emu) {
 /* Mode: Zero Page,Y */
 /* Bytes: 2 */
 /* Time: 4 */
-void op96(emu6502 *emu) {
+static void op96(emu6502 *emu) {
 
 }
 
@@ -1399,7 +1529,7 @@ void op96(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op97(emu6502 *emu) {
+static void op97(emu6502 *emu) {
 
 }
 
@@ -1407,7 +1537,7 @@ void op97(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void op98(emu6502 *emu) {
+static void op98(emu6502 *emu) {
 
 }
 
@@ -1415,7 +1545,7 @@ void op98(emu6502 *emu) {
 /* Mode: Absolute,Y */
 /* Bytes: 3 */
 /* Time: 5 */
-void op99(emu6502 *emu) {
+static void op99(emu6502 *emu) {
 
 }
 
@@ -1423,7 +1553,7 @@ void op99(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void op9A(emu6502 *emu) {
+static void op9A(emu6502 *emu) {
 
 }
 
@@ -1431,7 +1561,7 @@ void op9A(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op9B(emu6502 *emu) {
+static void op9B(emu6502 *emu) {
 
 }
 
@@ -1439,7 +1569,7 @@ void op9B(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op9C(emu6502 *emu) {
+static void op9C(emu6502 *emu) {
 
 }
 
@@ -1447,7 +1577,7 @@ void op9C(emu6502 *emu) {
 /* Mode: Absolute,X */
 /* Bytes: 3 */
 /* Time: 5 */
-void op9D(emu6502 *emu) {
+static void op9D(emu6502 *emu) {
 
 }
 
@@ -1455,7 +1585,7 @@ void op9D(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op9E(emu6502 *emu) {
+static void op9E(emu6502 *emu) {
 
 }
 
@@ -1463,7 +1593,7 @@ void op9E(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void op9F(emu6502 *emu) {
+static void op9F(emu6502 *emu) {
 
 }
 
@@ -1471,7 +1601,7 @@ void op9F(emu6502 *emu) {
 /* Mode: Immediate */
 /* Bytes: 2 */
 /* Time: 2 */
-void opA0(emu6502 *emu) {
+static void opA0(emu6502 *emu) {
 
 }
 
@@ -1479,7 +1609,7 @@ void opA0(emu6502 *emu) {
 /* Mode: Indirect,X */
 /* Bytes: 2 */
 /* Time: 6 */
-void opA1(emu6502 *emu) {
+static void opA1(emu6502 *emu) {
 
 }
 
@@ -1487,7 +1617,7 @@ void opA1(emu6502 *emu) {
 /* Mode: Immediate */
 /* Bytes: 2 */
 /* Time: 2 */
-void opA2(emu6502 *emu) {
+static void opA2(emu6502 *emu) {
 
 }
 
@@ -1495,7 +1625,7 @@ void opA2(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opA3(emu6502 *emu) {
+static void opA3(emu6502 *emu) {
 
 }
 
@@ -1503,7 +1633,7 @@ void opA3(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 3 */
-void opA4(emu6502 *emu) {
+static void opA4(emu6502 *emu) {
 
 }
 
@@ -1511,7 +1641,7 @@ void opA4(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 3 */
-void opA5(emu6502 *emu) {
+static void opA5(emu6502 *emu) {
 
 }
 
@@ -1519,7 +1649,7 @@ void opA5(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 3 */
-void opA6(emu6502 *emu) {
+static void opA6(emu6502 *emu) {
 
 }
 
@@ -1527,7 +1657,7 @@ void opA6(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opA7(emu6502 *emu) {
+static void opA7(emu6502 *emu) {
 
 }
 
@@ -1535,7 +1665,7 @@ void opA7(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void opA8(emu6502 *emu) {
+static void opA8(emu6502 *emu) {
 
 }
 
@@ -1543,7 +1673,7 @@ void opA8(emu6502 *emu) {
 /* Mode: Immediate */
 /* Bytes: 2 */
 /* Time: 2 */
-void opA9(emu6502 *emu) {
+static void opA9(emu6502 *emu) {
 
 }
 
@@ -1551,7 +1681,7 @@ void opA9(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void opAA(emu6502 *emu) {
+static void opAA(emu6502 *emu) {
 
 }
 
@@ -1559,7 +1689,7 @@ void opAA(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opAB(emu6502 *emu) {
+static void opAB(emu6502 *emu) {
 
 }
 
@@ -1567,7 +1697,7 @@ void opAB(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 4 */
-void opAC(emu6502 *emu) {
+static void opAC(emu6502 *emu) {
 
 }
 
@@ -1575,7 +1705,7 @@ void opAC(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 4 */
-void opAD(emu6502 *emu) {
+static void opAD(emu6502 *emu) {
 
 }
 
@@ -1583,7 +1713,7 @@ void opAD(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 4 */
-void opAE(emu6502 *emu) {
+static void opAE(emu6502 *emu) {
 
 }
 
@@ -1591,7 +1721,7 @@ void opAE(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opAF(emu6502 *emu) {
+static void opAF(emu6502 *emu) {
 
 }
 
@@ -1599,7 +1729,7 @@ void opAF(emu6502 *emu) {
 /* Mode: - */
 /* Bytes: 2 */
 /* Time: 2 (+1 if branch taken, +1 if page boundary crossed) */
-void opB0(emu6502 *emu) {
+static void opB0(emu6502 *emu) {
 
 }
 
@@ -1607,7 +1737,7 @@ void opB0(emu6502 *emu) {
 /* Mode: Indirect,Y */
 /* Bytes: 2 */
 /* Time: 5 (+1 if page boundary crossed) */
-void opB1(emu6502 *emu) {
+static void opB1(emu6502 *emu) {
 
 }
 
@@ -1615,7 +1745,7 @@ void opB1(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opB2(emu6502 *emu) {
+static void opB2(emu6502 *emu) {
 
 }
 
@@ -1623,7 +1753,7 @@ void opB2(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opB3(emu6502 *emu) {
+static void opB3(emu6502 *emu) {
 
 }
 
@@ -1631,7 +1761,7 @@ void opB3(emu6502 *emu) {
 /* Mode: Zero Page,X */
 /* Bytes: 2 */
 /* Time: 4 */
-void opB4(emu6502 *emu) {
+static void opB4(emu6502 *emu) {
 
 }
 
@@ -1639,7 +1769,7 @@ void opB4(emu6502 *emu) {
 /* Mode: Zero Page,X */
 /* Bytes: 2 */
 /* Time: 4 */
-void opB5(emu6502 *emu) {
+static void opB5(emu6502 *emu) {
 
 }
 
@@ -1647,7 +1777,7 @@ void opB5(emu6502 *emu) {
 /* Mode: Zero Page,Y */
 /* Bytes: 2 */
 /* Time: 4 */
-void opB6(emu6502 *emu) {
+static void opB6(emu6502 *emu) {
 
 }
 
@@ -1655,7 +1785,7 @@ void opB6(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opB7(emu6502 *emu) {
+static void opB7(emu6502 *emu) {
 
 }
 
@@ -1663,7 +1793,7 @@ void opB7(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void opB8(emu6502 *emu) {
+static void opB8(emu6502 *emu) {
 
 }
 
@@ -1671,7 +1801,7 @@ void opB8(emu6502 *emu) {
 /* Mode: Absolute,Y */
 /* Bytes: 3 */
 /* Time: 4 (+1 if page boundary crossed) */
-void opB9(emu6502 *emu) {
+static void opB9(emu6502 *emu) {
 
 }
 
@@ -1679,7 +1809,7 @@ void opB9(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void opBA(emu6502 *emu) {
+static void opBA(emu6502 *emu) {
 
 }
 
@@ -1687,7 +1817,7 @@ void opBA(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opBB(emu6502 *emu) {
+static void opBB(emu6502 *emu) {
 
 }
 
@@ -1695,7 +1825,7 @@ void opBB(emu6502 *emu) {
 /* Mode: Absolute,X */
 /* Bytes: 3 */
 /* Time: 4 (+1 if page boundary crossed) */
-void opBC(emu6502 *emu) {
+static void opBC(emu6502 *emu) {
 
 }
 
@@ -1703,7 +1833,7 @@ void opBC(emu6502 *emu) {
 /* Mode: Absolute,X */
 /* Bytes: 3 */
 /* Time: 4 (+1 if page boundary crossed) */
-void opBD(emu6502 *emu) {
+static void opBD(emu6502 *emu) {
 
 }
 
@@ -1711,7 +1841,7 @@ void opBD(emu6502 *emu) {
 /* Mode: Absolute,Y */
 /* Bytes: 3 */
 /* Time: 4 (+1 if page boundary crossed) */
-void opBE(emu6502 *emu) {
+static void opBE(emu6502 *emu) {
 
 }
 
@@ -1719,7 +1849,7 @@ void opBE(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opBF(emu6502 *emu) {
+static void opBF(emu6502 *emu) {
 
 }
 
@@ -1727,7 +1857,7 @@ void opBF(emu6502 *emu) {
 /* Mode: Immediate */
 /* Bytes: 2 */
 /* Time: 2 */
-void opC0(emu6502 *emu) {
+static void opC0(emu6502 *emu) {
 
 }
 
@@ -1735,7 +1865,7 @@ void opC0(emu6502 *emu) {
 /* Mode: Indirect,X */
 /* Bytes: 2 */
 /* Time: 6 */
-void opC1(emu6502 *emu) {
+static void opC1(emu6502 *emu) {
 
 }
 
@@ -1743,7 +1873,7 @@ void opC1(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opC2(emu6502 *emu) {
+static void opC2(emu6502 *emu) {
 
 }
 
@@ -1751,7 +1881,7 @@ void opC2(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opC3(emu6502 *emu) {
+static void opC3(emu6502 *emu) {
 
 }
 
@@ -1759,7 +1889,7 @@ void opC3(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 3 */
-void opC4(emu6502 *emu) {
+static void opC4(emu6502 *emu) {
 
 }
 
@@ -1767,7 +1897,7 @@ void opC4(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 3 */
-void opC5(emu6502 *emu) {
+static void opC5(emu6502 *emu) {
 
 }
 
@@ -1775,7 +1905,7 @@ void opC5(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 5 */
-void opC6(emu6502 *emu) {
+static void opC6(emu6502 *emu) {
 
 }
 
@@ -1783,7 +1913,7 @@ void opC6(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opC7(emu6502 *emu) {
+static void opC7(emu6502 *emu) {
 
 }
 
@@ -1791,7 +1921,7 @@ void opC7(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void opC8(emu6502 *emu) {
+static void opC8(emu6502 *emu) {
 
 }
 
@@ -1799,7 +1929,7 @@ void opC8(emu6502 *emu) {
 /* Mode: Immediate */
 /* Bytes: 2 */
 /* Time: 2 */
-void opC9(emu6502 *emu) {
+static void opC9(emu6502 *emu) {
 
 }
 
@@ -1807,7 +1937,7 @@ void opC9(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void opCA(emu6502 *emu) {
+static void opCA(emu6502 *emu) {
 
 }
 
@@ -1815,7 +1945,7 @@ void opCA(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opCB(emu6502 *emu) {
+static void opCB(emu6502 *emu) {
 
 }
 
@@ -1823,7 +1953,7 @@ void opCB(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 4 */
-void opCC(emu6502 *emu) {
+static void opCC(emu6502 *emu) {
 
 }
 
@@ -1831,7 +1961,7 @@ void opCC(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 4 */
-void opCD(emu6502 *emu) {
+static void opCD(emu6502 *emu) {
 
 }
 
@@ -1839,7 +1969,7 @@ void opCD(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 6 */
-void opCE(emu6502 *emu) {
+static void opCE(emu6502 *emu) {
 
 }
 
@@ -1847,7 +1977,7 @@ void opCE(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opCF(emu6502 *emu) {
+static void opCF(emu6502 *emu) {
 
 }
 
@@ -1855,7 +1985,7 @@ void opCF(emu6502 *emu) {
 /* Mode: - */
 /* Bytes: 2 */
 /* Time: 2 (+1 if branch taken, +1 if page boundary crossed) */
-void opD0(emu6502 *emu) {
+static void opD0(emu6502 *emu) {
 
 }
 
@@ -1863,7 +1993,7 @@ void opD0(emu6502 *emu) {
 /* Mode: Indirect,Y */
 /* Bytes: 2 */
 /* Time: 5 (+1 if page boundary crossed) */
-void opD1(emu6502 *emu) {
+static void opD1(emu6502 *emu) {
 
 }
 
@@ -1871,7 +2001,7 @@ void opD1(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opD2(emu6502 *emu) {
+static void opD2(emu6502 *emu) {
 
 }
 
@@ -1879,7 +2009,7 @@ void opD2(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opD3(emu6502 *emu) {
+static void opD3(emu6502 *emu) {
 
 }
 
@@ -1887,7 +2017,7 @@ void opD3(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opD4(emu6502 *emu) {
+static void opD4(emu6502 *emu) {
 
 }
 
@@ -1895,7 +2025,7 @@ void opD4(emu6502 *emu) {
 /* Mode: Zero Page,X */
 /* Bytes: 2 */
 /* Time: 4 */
-void opD5(emu6502 *emu) {
+static void opD5(emu6502 *emu) {
 
 }
 
@@ -1903,7 +2033,7 @@ void opD5(emu6502 *emu) {
 /* Mode: Zero Page,X */
 /* Bytes: 2 */
 /* Time: 6 */
-void opD6(emu6502 *emu) {
+static void opD6(emu6502 *emu) {
 
 }
 
@@ -1911,7 +2041,7 @@ void opD6(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opD7(emu6502 *emu) {
+static void opD7(emu6502 *emu) {
 
 }
 
@@ -1919,7 +2049,7 @@ void opD7(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void opD8(emu6502 *emu) {
+static void opD8(emu6502 *emu) {
 
 }
 
@@ -1927,7 +2057,7 @@ void opD8(emu6502 *emu) {
 /* Mode: Absolute,Y */
 /* Bytes: 3 */
 /* Time: 4 (+1 if page boundary crossed) */
-void opD9(emu6502 *emu) {
+static void opD9(emu6502 *emu) {
 
 }
 
@@ -1935,7 +2065,7 @@ void opD9(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opDA(emu6502 *emu) {
+static void opDA(emu6502 *emu) {
 
 }
 
@@ -1943,7 +2073,7 @@ void opDA(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opDB(emu6502 *emu) {
+static void opDB(emu6502 *emu) {
 
 }
 
@@ -1951,7 +2081,7 @@ void opDB(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opDC(emu6502 *emu) {
+static void opDC(emu6502 *emu) {
 
 }
 
@@ -1959,7 +2089,7 @@ void opDC(emu6502 *emu) {
 /* Mode: Absolute,X */
 /* Bytes: 3 */
 /* Time: 4 (+1 if page boundary crossed) */
-void opDD(emu6502 *emu) {
+static void opDD(emu6502 *emu) {
 
 }
 
@@ -1967,7 +2097,7 @@ void opDD(emu6502 *emu) {
 /* Mode: Absolute,X */
 /* Bytes: 3 */
 /* Time: 7 */
-void opDE(emu6502 *emu) {
+static void opDE(emu6502 *emu) {
 
 }
 
@@ -1975,7 +2105,7 @@ void opDE(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opDF(emu6502 *emu) {
+static void opDF(emu6502 *emu) {
 
 }
 
@@ -1983,7 +2113,7 @@ void opDF(emu6502 *emu) {
 /* Mode: Immediate */
 /* Bytes: 2 */
 /* Time: 2 */
-void opE0(emu6502 *emu) {
+static void opE0(emu6502 *emu) {
 
 }
 
@@ -1991,7 +2121,7 @@ void opE0(emu6502 *emu) {
 /* Mode: Indirect,X */
 /* Bytes: 2 */
 /* Time: 6 */
-void opE1(emu6502 *emu) {
+static void opE1(emu6502 *emu) {
 
 }
 
@@ -1999,7 +2129,7 @@ void opE1(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opE2(emu6502 *emu) {
+static void opE2(emu6502 *emu) {
 
 }
 
@@ -2007,7 +2137,7 @@ void opE2(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opE3(emu6502 *emu) {
+static void opE3(emu6502 *emu) {
 
 }
 
@@ -2015,7 +2145,7 @@ void opE3(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 3 */
-void opE4(emu6502 *emu) {
+static void opE4(emu6502 *emu) {
 
 }
 
@@ -2023,7 +2153,7 @@ void opE4(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 3 */
-void opE5(emu6502 *emu) {
+static void opE5(emu6502 *emu) {
 
 }
 
@@ -2031,7 +2161,7 @@ void opE5(emu6502 *emu) {
 /* Mode: Zero Page */
 /* Bytes: 2 */
 /* Time: 5 */
-void opE6(emu6502 *emu) {
+static void opE6(emu6502 *emu) {
 
 }
 
@@ -2039,7 +2169,7 @@ void opE6(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opE7(emu6502 *emu) {
+static void opE7(emu6502 *emu) {
 
 }
 
@@ -2047,7 +2177,7 @@ void opE7(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void opE8(emu6502 *emu) {
+static void opE8(emu6502 *emu) {
 
 }
 
@@ -2055,7 +2185,7 @@ void opE8(emu6502 *emu) {
 /* Mode: Immediate */
 /* Bytes: 2 */
 /* Time: 2 */
-void opE9(emu6502 *emu) {
+static void opE9(emu6502 *emu) {
 
 }
 
@@ -2063,7 +2193,7 @@ void opE9(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void opEA(emu6502 *emu) {
+static void opEA(emu6502 *emu) {
 
 }
 
@@ -2071,7 +2201,7 @@ void opEA(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opEB(emu6502 *emu) {
+static void opEB(emu6502 *emu) {
 
 }
 
@@ -2079,7 +2209,7 @@ void opEB(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 4 */
-void opEC(emu6502 *emu) {
+static void opEC(emu6502 *emu) {
 
 }
 
@@ -2087,7 +2217,7 @@ void opEC(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 4 */
-void opED(emu6502 *emu) {
+static void opED(emu6502 *emu) {
 
 }
 
@@ -2095,7 +2225,7 @@ void opED(emu6502 *emu) {
 /* Mode: Absolute */
 /* Bytes: 3 */
 /* Time: 6 */
-void opEE(emu6502 *emu) {
+static void opEE(emu6502 *emu) {
 
 }
 
@@ -2103,7 +2233,7 @@ void opEE(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opEF(emu6502 *emu) {
+static void opEF(emu6502 *emu) {
 
 }
 
@@ -2111,7 +2241,7 @@ void opEF(emu6502 *emu) {
 /* Mode: - */
 /* Bytes: 2 */
 /* Time: 2 (+1 if branch taken, +1 if page boundary crossed) */
-void opF0(emu6502 *emu) {
+static void opF0(emu6502 *emu) {
 
 }
 
@@ -2119,7 +2249,7 @@ void opF0(emu6502 *emu) {
 /* Mode: Indirect,Y */
 /* Bytes: 2 */
 /* Time: 5 (+1 if page boundary crossed) */
-void opF1(emu6502 *emu) {
+static void opF1(emu6502 *emu) {
 
 }
 
@@ -2127,7 +2257,7 @@ void opF1(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opF2(emu6502 *emu) {
+static void opF2(emu6502 *emu) {
 
 }
 
@@ -2135,7 +2265,7 @@ void opF2(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opF3(emu6502 *emu) {
+static void opF3(emu6502 *emu) {
 
 }
 
@@ -2143,7 +2273,7 @@ void opF3(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opF4(emu6502 *emu) {
+static void opF4(emu6502 *emu) {
 
 }
 
@@ -2151,7 +2281,7 @@ void opF4(emu6502 *emu) {
 /* Mode: Zero Page,X */
 /* Bytes: 2 */
 /* Time: 4 */
-void opF5(emu6502 *emu) {
+static void opF5(emu6502 *emu) {
 
 }
 
@@ -2159,7 +2289,7 @@ void opF5(emu6502 *emu) {
 /* Mode: Zero Page,X */
 /* Bytes: 2 */
 /* Time: 6 */
-void opF6(emu6502 *emu) {
+static void opF6(emu6502 *emu) {
 
 }
 
@@ -2167,7 +2297,7 @@ void opF6(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opF7(emu6502 *emu) {
+static void opF7(emu6502 *emu) {
 
 }
 
@@ -2175,7 +2305,7 @@ void opF7(emu6502 *emu) {
 /* Mode: Implied */
 /* Bytes: 1 */
 /* Time: 2 */
-void opF8(emu6502 *emu) {
+static void opF8(emu6502 *emu) {
 
 }
 
@@ -2183,7 +2313,7 @@ void opF8(emu6502 *emu) {
 /* Mode: Absolute,Y */
 /* Bytes: 3 */
 /* Time: 4 (+1 if page boundary crossed) */
-void opF9(emu6502 *emu) {
+static void opF9(emu6502 *emu) {
 
 }
 
@@ -2191,7 +2321,7 @@ void opF9(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opFA(emu6502 *emu) {
+static void opFA(emu6502 *emu) {
 
 }
 
@@ -2199,7 +2329,7 @@ void opFA(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opFB(emu6502 *emu) {
+static void opFB(emu6502 *emu) {
 
 }
 
@@ -2207,7 +2337,7 @@ void opFB(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opFC(emu6502 *emu) {
+static void opFC(emu6502 *emu) {
 
 }
 
@@ -2215,7 +2345,7 @@ void opFC(emu6502 *emu) {
 /* Mode: Absolute,X */
 /* Bytes: 3 */
 /* Time: 4 (+1 if page boundary crossed) */
-void opFD(emu6502 *emu) {
+static void opFD(emu6502 *emu) {
 
 }
 
@@ -2223,7 +2353,7 @@ void opFD(emu6502 *emu) {
 /* Mode: Absolute,X */
 /* Bytes: 3 */
 /* Time: 7 */
-void opFE(emu6502 *emu) {
+static void opFE(emu6502 *emu) {
 
 }
 
@@ -2231,6 +2361,6 @@ void opFE(emu6502 *emu) {
 /* Mode: ? */
 /* Bytes: ? */
 /* Time: ? */
-void opFF(emu6502 *emu) {
+static void opFF(emu6502 *emu) {
 
 }

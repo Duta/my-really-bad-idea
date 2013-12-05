@@ -243,7 +243,7 @@ uint16_t emu6502_indxaddr(emu6502 *emu) {
 
 uint16_t emu6502_indyaddr(emu6502 *emu) {
   uint16_t a = emu6502_getword(emu, emu->ram[emu->pc]);
-  uint16_t b = (a + emu->y);
+  uint16_t b = a + emu->y;
   emu6502_addifpgcrs(emu, a, b);
   return b;
 }
@@ -254,14 +254,14 @@ uint16_t emu6502_absaddr(emu6502 *emu) {
 
 uint16_t emu6502_absxaddr(emu6502 *emu) {
   uint16_t a = emu6502_getword(emu, emu->pc);
-  uint16_t b = (a + emu->x);
+  uint16_t b = a + emu->x;
   emu6502_addifpgcrs(emu, a, b);
   return b;
 }
 
 uint16_t emu6502_absyaddr(emu6502 *emu) {
   uint16_t a = emu6502_getword(emu, emu->pc);
-  uint16_t b = (a + emu->x);
+  uint16_t b = a + emu->x;
   emu6502_addifpgcrs(emu, a, b);
   return b;
 }
@@ -274,13 +274,15 @@ void emu6502_bchreladdr(emu6502 *emu) {
   emu->pc = addr;
 }
 
+#define STACK_OFF 0x100
 void emu6502_push(emu6502 *emu, uint8_t val) {
-  emu->ram[--emu->sp + 0x100] = val;
+  emu->ram[--emu->sp + STACK_OFF] = val;
 }
 
 uint8_t emu6502_pop(emu6502 *emu) {
-  return emu->ram[emu->sp++ + 0x100];
+  return emu->ram[emu->sp++ + STACK_OFF];
 }
+#undef STACK_OFF
 
 void emu6502_pushword(emu6502 *emu, uint16_t val) {
   emu6502_push(emu, 0xFF & (val >> 8));
@@ -296,6 +298,8 @@ uint16_t emu6502_popword(emu6502 *emu) {
 /* Comments for opXX functions is from: */
 /* www.atarimax.com/jindroush.atari.org/aopc.html */
 
+#define ADD_CYCS(x) emu->cycs += x
+
 /* Syntax: BRK */
 /* Mode: Implied */
 /* Bytes: 1 */
@@ -309,6 +313,7 @@ static void op00(emu6502 *emu) {
 /* Bytes: 2 */
 /* Time: 6 */
 static void op01(emu6502 *emu) {
+  ADD_CYCS(6);
   emu->acc |= emu6502_indxaddr(emu);
   if(emu->acc & (1 << NEG_BIT))
     emu6502_setneg(emu);
@@ -349,7 +354,16 @@ static void op04(emu6502 *emu) {
 /* Bytes: 2 */
 /* Time: 2 */
 static void op05(emu6502 *emu) {
-
+  ADD_CYCS(2);
+  emu->acc |= emu6502_zeropgaddr(emu);
+  if(emu->acc & (1 << NEG_BIT))
+    emu6502_setneg(emu);
+  else
+    emu6502_clrneg(emu);
+  if(emu->acc)
+    emu6502_clrzero(emu);
+  else
+    emu6502_setzero(emu);
 }
 
 /* Syntax: ASL $44 */
@@ -381,7 +395,16 @@ static void op08(emu6502 *emu) {
 /* Bytes: 2 */
 /* Time: 2 */
 static void op09(emu6502 *emu) {
-
+  ADD_CYCS(2);
+  emu->acc |= emu6502_immbyte(emu);
+  if(emu->acc & (1 << NEG_BIT))
+    emu6502_setneg(emu);
+  else
+    emu6502_clrneg(emu);
+  if(emu->acc)
+    emu6502_clrzero(emu);
+  else
+    emu6502_setzero(emu);
 }
 
 /* Syntax: ASL A */
@@ -2351,6 +2374,8 @@ static void opFE(emu6502 *emu) {
 static void opFF(emu6502 *emu) {
 
 }
+
+#undef ADD_CYCS
 
 #undef CARRY_BIT
 #undef ZERO_BIT

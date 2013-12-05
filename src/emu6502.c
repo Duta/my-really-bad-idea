@@ -299,14 +299,7 @@ void emu6502_clrneg(emu6502 *emu) {
 #undef GET_FLAG
 #undef SET_FLAG
 #undef CLR_FLAG
-
-#undef CARRY_BIT
-#undef ZERO_BIT
-#undef INTDIS_BIT
-#undef DECMOD_BIT
-#undef BRK_BIT
-#undef OVER_BIT
-#undef NEG_BIT
+/* Other undefs after opXX functions */
 
 void emu6502_addifpgcrs(emu6502 *emu, uint16_t a, uint16_t b) {
   if((a & 0xFF00) != (b & 0xFF00)) {
@@ -410,7 +403,15 @@ static void op00(emu6502 *emu) {
 /* Bytes: 2 */
 /* Time: 6 */
 static void op01(emu6502 *emu) {
-
+  emu->acc |= emu6502_indxaddr(emu);
+  if(emu->acc & (1 << NEG_BIT))
+    emu6502_setneg(emu);
+  else
+    emu6502_clrneg(emu);
+  if(emu->acc)
+    emu6502_clrzero(emu);
+  else
+    emu6502_setzero(emu);
 }
 
 /* Syntax: ? */
@@ -2444,3 +2445,12 @@ static void opFE(emu6502 *emu) {
 static void opFF(emu6502 *emu) {
 
 }
+
+#undef CARRY_BIT
+#undef ZERO_BIT
+#undef INTDIS_BIT
+#undef DECMOD_BIT
+#undef BRK_BIT
+#undef OVER_BIT
+#undef NEG_BIT
+

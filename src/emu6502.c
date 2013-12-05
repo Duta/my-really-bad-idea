@@ -200,89 +200,113 @@ void emu6502_exeins(emu6502 *emu) {
   inslookup[ins](emu);
 }
 
+#define CARRY_BIT  0
+#define ZERO_BIT   1
+#define INTDIS_BIT 2
+#define DECMOD_BIT 3
+#define BRK_BIT    4
+#define OVER_BIT   6
+#define NEG_BIT    7
+
+#define GET_FLAG(x) !!(emu->psw & (1 << x))
+#define SET_FLAG(x) emu->psw |= 1 << x
+#define CLR_FLAG(x) emu->psw &= ~(1 << x)
+
 bool emu6502_carry(emu6502 *emu) {
-  return !!(emu->psw & (1 << 0));
+  return GET_FLAG(CARRY_BIT);
 }
 
 bool emu6502_zero(emu6502 *emu) {
-  return !!(emu->psw & (1 << 1));
+  return GET_FLAG(ZERO_BIT);
 }
 
 bool emu6502_intdis(emu6502 *emu) {
-  return !!(emu->psw & (1 << 2));
+  return GET_FLAG(INTDIS_BIT);
 }
 
 bool emu6502_decmod(emu6502 *emu) {
-  return !!(emu->psw & (1 << 3));
+  return GET_FLAG(DECMOD_BIT);
 }
 
 bool emu6502_brk(emu6502 *emu) {
-  return !!(emu->psw & (1 << 4));
+  return GET_FLAG(BRK_BIT);
 }
 
 bool emu6502_over(emu6502 *emu) {
-  return !!(emu->psw & (1 << 6));
+  return GET_FLAG(OVER_BIT);
 }
 
 bool emu6502_neg(emu6502 *emu) {
-  return !!(emu->psw & (1 << 7));
+  return GET_FLAG(NEG_BIT);
 }
 
 void emu6502_setcarry(emu6502 *emu) {
-  emu->psw |= 1 << 0;
+  SET_FLAG(CARRY_BIT);
 }
 
 void emu6502_setzero(emu6502 *emu) {
-  emu->psw |= 1 << 1;
+  SET_FLAG(ZERO_BIT);
 }
 
 void emu6502_setintdis(emu6502 *emu) {
-  emu->psw |= 1 << 2;
+  SET_FLAG(INTDIS_BIT);
 }
 
 void emu6502_setdecmod(emu6502 *emu) {
-  emu->psw |= 1 << 3;
+  SET_FLAG(DECMOD_BIT);
 }
 
 void emu6502_setbrk(emu6502 *emu) {
-  emu->psw |= 1 << 4;
+  SET_FLAG(BRK_BIT);
 }
 
 void emu6502_setover(emu6502 *emu) {
-  emu->psw |= 1 << 6;
+  SET_FLAG(OVER_BIT);
 }
 
 void emu6502_setneg(emu6502 *emu) {
-  emu->psw |= 1 << 7;
+  SET_FLAG(NEG_BIT);
 }
 
 void emu6502_clrcarry(emu6502 *emu) {
-  emu->psw &= ~(1 << 0);
+  CLR_FLAG(CARRY_BIT);
 }
 
 void emu6502_clrzero(emu6502 *emu) {
-  emu->psw &= ~(1 << 1);
+  CLR_FLAG(ZERO_BIT);
 }
 
 void emu6502_clrintdis(emu6502 *emu) {
-  emu->psw &= ~(1 << 2);
+  CLR_FLAG(INTDIS_BIT);
 }
 
 void emu6502_clrdecmod(emu6502 *emu) {
-  emu->psw &= ~(1 << 3);
+  CLR_FLAG(DECMOD_BIT);
 }
 
 void emu6502_clrbrk(emu6502 *emu) {
-  emu->psw &= ~(1 << 4);
+  CLR_FLAG(BRK_BIT);
 }
 
 void emu6502_clrover(emu6502 *emu) {
-  emu->psw &= ~(1 << 6);
+  CLR_FLAG(OVER_BIT);
 }
 
 void emu6502_clrneg(emu6502 *emu) {
-  emu->psw &= ~(1 << 7);
+  CLR_FLAG(NEG_BIT);
 }
+
+#undef GET_FLAG
+#undef SET_FLAG
+#undef CLR_FLAG
+
+#undef CARRY_BIT
+#undef ZERO_BIT
+#undef INTDIS_BIT
+#undef DECMOD_BIT
+#undef BRK_BIT
+#undef OVER_BIT
+#undef NEG_BIT
 
 void emu6502_addifpgcrs(emu6502 *emu, uint16_t a, uint16_t b) {
   if((a & 0xFF00) != (b & 0xFF00)) {

@@ -201,31 +201,87 @@ void emu6502_exeins(emu6502 *emu) {
 }
 
 bool emu6502_carry(emu6502 *emu) {
-  return emu->psw & (1 << 0) ? 1 : 0;
+  return !!(emu->psw & (1 << 0));
 }
 
 bool emu6502_zero(emu6502 *emu) {
-  return emu->psw & (1 << 1) ? 1 : 0;
+  return !!(emu->psw & (1 << 1));
 }
 
 bool emu6502_intdis(emu6502 *emu) {
-  return emu->psw & (1 << 2) ? 1 : 0;
+  return !!(emu->psw & (1 << 2));
 }
 
 bool emu6502_decmod(emu6502 *emu) {
-  return emu->psw & (1 << 3) ? 1 : 0;
+  return !!(emu->psw & (1 << 3));
 }
 
 bool emu6502_brk(emu6502 *emu) {
-  return emu->psw & (1 << 4) ? 1 : 0;
+  return !!(emu->psw & (1 << 4));
 }
 
 bool emu6502_over(emu6502 *emu) {
-  return emu->psw & (1 << 6) ? 1 : 0;
+  return !!(emu->psw & (1 << 6));
 }
 
 bool emu6502_neg(emu6502 *emu) {
-  return emu->psw & (1 << 7) ? 1 : 0;
+  return !!(emu->psw & (1 << 7));
+}
+
+void emu6502_setcarry(emu6502 *emu) {
+  emu->psw |= 1 << 0;
+}
+
+void emu6502_setzero(emu6502 *emu) {
+  emu->psw |= 1 << 1;
+}
+
+void emu6502_setintdis(emu6502 *emu) {
+  emu->psw |= 1 << 2;
+}
+
+void emu6502_setdecmod(emu6502 *emu) {
+  emu->psw |= 1 << 3;
+}
+
+void emu6502_setbrk(emu6502 *emu) {
+  emu->psw |= 1 << 4;
+}
+
+void emu6502_setover(emu6502 *emu) {
+  emu->psw |= 1 << 6;
+}
+
+void emu6502_setneg(emu6502 *emu) {
+  emu->psw |= 1 << 7;
+}
+
+void emu6502_clrcarry(emu6502 *emu) {
+  emu->psw &= ~(1 << 0);
+}
+
+void emu6502_clrzero(emu6502 *emu) {
+  emu->psw &= ~(1 << 1);
+}
+
+void emu6502_clrintdis(emu6502 *emu) {
+  emu->psw &= ~(1 << 2);
+}
+
+void emu6502_clrdecmod(emu6502 *emu) {
+  emu->psw &= ~(1 << 3);
+}
+
+void emu6502_clrbrk(emu6502 *emu) {
+  emu->psw &= ~(1 << 4);
+}
+
+void emu6502_clrover(emu6502 *emu) {
+  emu->psw &= ~(1 << 6);
+}
+
+void emu6502_clrneg(emu6502 *emu) {
+  emu->psw &= ~(1 << 7);
 }
 
 void emu6502_addifpgcrs(emu6502 *emu, uint16_t a, uint16_t b) {

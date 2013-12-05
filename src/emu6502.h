@@ -34,13 +34,31 @@ void emu6502_emu(emu6502 *emu);
 void emu6502_exeins(emu6502 *emu);
 
 /* Flags Testing */
-bool emu6502_carry(emu6502 *emu);   /* Carry Flag          */
-bool emu6502_zero(emu6502 *emu);    /* Zero Flag           */
-bool emu6502_intdis(emu6502 *emu);  /* Interrupts Disabled */
-bool emu6502_decmod(emu6502 *emu);  /* Decimal Mode        */
-bool emu6502_brk(emu6502 *emu);     /* Break Command       */
-bool emu6502_over(emu6502 *emu);    /* Overflow Flag       */
-bool emu6502_neg(emu6502 *emu);     /* Negative Flag       */
+bool emu6502_carry(emu6502 *emu);  /* Carry Flag          */
+bool emu6502_zero(emu6502 *emu);   /* Zero Flag           */
+bool emu6502_intdis(emu6502 *emu); /* Interrupts Disabled */
+bool emu6502_decmod(emu6502 *emu); /* Decimal Mode        */
+bool emu6502_brk(emu6502 *emu);    /* Break Command       */
+bool emu6502_over(emu6502 *emu);   /* Overflow Flag       */
+bool emu6502_neg(emu6502 *emu);    /* Negative Flag       */
+
+/* Flags Setting */
+void emu6502_setcarry(emu6502 *emu);  /* Carry Flag         */
+void emu6502_setzero(emu6502 *emu);   /* Zero Flag          */
+void emu6502_setintdis(emu6502 *emu); /* Disable Interrupts */
+void emu6502_setdecmod(emu6502 *emu); /* Decimal Mode       */
+void emu6502_setbrk(emu6502 *emu);    /* Break Command      */
+void emu6502_setover(emu6502 *emu);   /* Overflow Flag      */
+void emu6502_setneg(emu6502 *emu);    /* Negative Flag      */
+
+/* Flags Clearing */
+void emu6502_clrcarry(emu6502 *emu);  /* Carry Flag         */
+void emu6502_clrzero(emu6502 *emu);   /* Zero Flag          */
+void emu6502_clrintdis(emu6502 *emu); /* Disable Interrupts */
+void emu6502_clrdecmod(emu6502 *emu); /* Decimal Mode       */
+void emu6502_clrbrk(emu6502 *emu);    /* Break Command      */
+void emu6502_clrover(emu6502 *emu);   /* Overflow Flag      */
+void emu6502_clrneg(emu6502 *emu);    /* Negative Flag      */
 
 /* Helpful Functions */
 /* Idea from 6502cpu.js */

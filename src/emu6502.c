@@ -106,17 +106,17 @@ void emu6502_exeins(emu6502 *emu) {
   inslookup[ins](emu);
 }
 
-#define CARRY_BIT  0
-#define ZERO_BIT   1
-#define INTDIS_BIT 2
-#define DECMOD_BIT 3
-#define BRK_BIT    4
-#define OVER_BIT   6
-#define NEG_BIT    7
+#define CARRY_BIT  (0)
+#define ZERO_BIT   (1)
+#define INTDIS_BIT (2)
+#define DECMOD_BIT (3)
+#define BRK_BIT    (4)
+#define OVER_BIT   (6)
+#define NEG_BIT    (7)
 
-#define GET_FLAG(x) !!(emu->psw & (1 << x))
-#define SET_FLAG(x) emu->psw |= 1 << x
-#define CLR_FLAG(x) emu->psw &= ~(1 << x)
+#define GET_FLAG(x) (!!(emu->psw & (1 << (x)))
+#define SET_FLAG(x) (emu->psw |= 1 << (x))
+#define CLR_FLAG(x) (emu->psw &= ~(1 << (x)))
 
 bool emu6502_carry(emu6502 *emu) {
   return GET_FLAG(CARRY_BIT);
